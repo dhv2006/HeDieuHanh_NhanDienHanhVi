@@ -1,0 +1,1843 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a1017" />
+  <script>
+    try {
+      const theme = localStorage.getItem('behaviorlens-theme') === 'light' ? 'light' : 'dark';
+      document.documentElement.dataset.theme = theme;
+      document.querySelector('meta[name="theme-color"]').content = theme === 'light' ? '#ffffff' : '#0a1017';
+    } catch { document.documentElement.dataset.theme = 'dark'; }
+  </script>
+  <title>BehaviorLens AI — Phân tích Hành vi & Hướng dẫn Động tác Đa Nền Tảng</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23f5b83d'/%3E%3Ccircle cx='16' cy='8' r='3' fill='%23241a05'/%3E%3Cpath d='M16 12v8M16 14l-6 4M16 14l6-5M16 20l-4 7M16 20l5 6' stroke='%23241a05' stroke-width='2.4' stroke-linecap='round' fill='none'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- app-styles:start -->
+<style>
+/* =========================================================
+   BehaviorLens v3.0 — Giao diện Phân tích Hành vi & Huấn luyện Động tác AI
+   Đa nền tảng (PC & Điện thoại) · Khung xương Thân + Đầu + 21 khớp Bàn tay
+   ========================================================= */
+:root {
+  --bg: #0a1017;
+  --bg-2: #0d151e;
+  --panel: #111b26;
+  --panel-2: #172433;
+  --panel-3: #1d2d3f;
+  --line: rgba(148, 178, 204, 0.12);
+  --line-2: rgba(148, 178, 204, 0.22);
+  --text: #e8eef4;
+  --muted: #8a9db0;
+  --faint: #5d7185;
+  --accent: #f5b83d;
+  --accent-text: var(--accent);
+  --accent-2: #ff8a4c;
+  --accent-ink: #241a05;
+  --teal: #3dd6c6;
+  --teal-ink: #04201d;
+  --danger: #ff5d73;
+  --ok: #5fd39b;
+  --radius-s: 8px;
+  --radius-m: 14px;
+  --radius-l: 20px;
+  --shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 10px 30px -12px rgba(0, 0, 0, 0.6);
+  --font: "Be Vietnam Pro", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", sans-serif;
+  --mono: "JetBrains Mono", "Consolas", ui-monospace, SFMono-Regular, monospace;
+  --sidebar: 232px;
+  --chat-width: clamp(320px, 28vw, 420px);
+  --media-stage-height: 66vh;
+  --media-stage-height: 66svh;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  --card-surface: linear-gradient(180deg, rgba(23, 36, 51, 0.55), rgba(17, 27, 38, 0.9));
+  --raised-surface: linear-gradient(180deg, rgba(23, 36, 51, 0.7), rgba(17, 27, 38, 0.95));
+  --sidebar-surface: linear-gradient(180deg, rgba(17, 27, 38, 0.98), rgba(10, 16, 23, 0.98));
+  --topbar-surface: rgba(10, 16, 23, 0.82);
+  --suggest-surface: rgba(13, 21, 30, 0.5);
+  --toast-surface: rgba(23, 36, 51, .96);
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --bg: #ffffff;
+  --bg-2: #f3f7fc;
+  --panel: #ffffff;
+  --panel-2: #e4edf8;
+  --panel-3: #ccdcf0;
+  --line: rgba(23, 63, 109, .17);
+  --line-2: rgba(23, 63, 109, .32);
+  --text: #11243a;
+  --muted: #3b5573;
+  --faint: #526a86;
+  --accent-text: #985100;
+  --teal: #007d76;
+  --teal-ink: #ffffff;
+  --danger: #b91c3e;
+  --ok: #146c43;
+  --shadow: 0 1px 0 rgba(255, 255, 255, .9) inset, 0 10px 30px -12px rgba(34, 57, 80, .15);
+  --card-surface: #ffffff;
+  --raised-surface: #ffffff;
+  --sidebar-surface: #ffffff;
+  --topbar-surface: rgba(255, 255, 255, .96);
+  --suggest-surface: #f3f7fc;
+  --toast-surface: rgba(255, 255, 255, .97);
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; }
+body {
+  background:
+    radial-gradient(900px 500px at 85% -10%, rgba(245, 184, 61, 0.07), transparent 60%),
+    radial-gradient(700px 500px at 0% 100%, rgba(61, 214, 198, 0.05), transparent 60%),
+    var(--bg);
+  background-attachment: fixed;
+  color: var(--text);
+  font: 400 14px/1.55 var(--font);
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4 { margin: 0; font-weight: 600; letter-spacing: -0.015em; }
+h1 { font-size: 17px; }
+h2 { font-size: 15.5px; }
+h3 { font-size: 14px; }
+h4 { font-size: 13.5px; }
+p { margin: 0; }
+button, input, select, textarea { font: inherit; color: inherit; }
+svg { width: 18px; height: 18px; fill: currentColor; flex: none; }
+[hidden] { display: none !important; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.muted { color: var(--muted); }
+.small { font-size: 12.5px; }
+.mono { font-family: var(--mono); font-size: 12.5px; }
+.grow { flex: 1 1 180px; }
+.ok-text { color: var(--ok); }
+.warn-text { color: #f7c95e; }
+.err-text, .danger-text { color: var(--danger); }
+b { font-weight: 600; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+::selection { background: rgba(245, 184, 61, 0.35); }
+
+* { scrollbar-width: thin; scrollbar-color: var(--panel-3) transparent; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: var(--panel-3); border-radius: 10px; border: 3px solid transparent; background-clip: content-box; }
+
+/* ---------- Khung ứng dụng & Ngăn kéo chức năng bên trái ---------- */
+.app { display: block; min-height: 100vh; position: relative; margin-right: 0; transition: margin-right .28s var(--ease); }
+body.is-chat-open:not(.is-chat-modal) .app { margin-right: var(--chat-width); }
+body.is-chat-open:not(.is-chat-modal) .top-actions .lbl { display: none; }
+
+.brand-bar {
+  display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+}
+.sidebar-toggle-btn {
+  border: 0 !important; outline: none; background: transparent !important; box-shadow: none !important;
+  color: var(--text); cursor: pointer; padding: 7px; border-radius: 8px;
+  display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+  transition: color .15s, background .15s;
+}
+.sidebar-toggle-btn:hover { color: var(--accent-text); background: rgba(148, 178, 204, 0.08) !important; }
+.sidebar-toggle-btn svg { width: 22px; height: 22px; }
+
+.sidebar-backdrop {
+  position: fixed; inset: 0; z-index: 90;
+  background: rgba(6, 10, 16, 0.52);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0; pointer-events: none;
+  transition: opacity .25s var(--ease);
+}
+.app.is-sidebar-open .sidebar-backdrop {
+  opacity: 1; pointer-events: auto;
+}
+.app.is-sidebar-open .main,
+.app.is-sidebar-open ~ .chat-fab-btn {
+  filter: blur(6px);
+  pointer-events: none;
+  user-select: none;
+  transition: filter .25s var(--ease);
+}
+
+.sidebar {
+  position: fixed; top: 0; left: 0; bottom: 0;
+  width: 268px; height: 100vh;
+  display: flex; flex-direction: column; gap: 22px;
+  padding: 14px 16px 16px;
+  background: var(--sidebar-surface);
+  border-right: 1px solid var(--line-2);
+  box-shadow: none;
+  z-index: 100;
+  visibility: hidden;
+  transform: translateX(-104%);
+  transition: transform .26s var(--ease), visibility 0s .26s;
+}
+.app.is-sidebar-open .sidebar {
+  visibility: visible;
+  transform: translateX(0);
+  transition-delay: 0s;
+  box-shadow: 24px 0 60px rgba(0, 0, 0, 0.75);
+}
+.brand { display: flex; align-items: center; gap: 11px; padding: 0 2px; }
+.brand-mark {
+  width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center; flex: none;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow: 0 8px 20px -8px rgba(245, 150, 61, 0.7);
+}
+.brand-mark svg { width: 26px; height: 26px; fill: var(--accent-ink); stroke: var(--accent-ink); stroke-width: 2.4; stroke-linecap: round; }
+.brand-mark path { fill: none; }
+.brand h1 { font-size: 17px; font-weight: 700; }
+.brand h1 span { color: var(--accent-text); }
+.brand-sub { font-size: 11.5px; color: var(--muted); }
+
+.tabs { display: flex; flex-direction: column; gap: 4px; }
+.tab {
+  display: flex; align-items: center; gap: 12px; width: 100%;
+  border: 0; background: transparent; padding: 10px 12px; border-radius: 11px;
+  color: var(--muted); cursor: pointer; font-weight: 500; text-align: left;
+  transition: background .15s, color .15s;
+  position: relative;
+}
+.tab svg { width: 19px; height: 19px; opacity: .85; }
+.tab:hover { background: rgba(148, 178, 204, 0.06); color: var(--text); }
+.tab.is-active { background: var(--panel-2); color: var(--text); box-shadow: inset 0 0 0 1px var(--line); }
+.tab.is-active svg { color: var(--accent-text); opacity: 1; }
+.tab.is-active::before {
+  content: ""; position: absolute; left: -14px; top: 10px; bottom: 10px; width: 3px;
+  border-radius: 0 3px 3px 0; background: var(--accent);
+}
+
+.sidebar-foot { margin-top: auto; display: flex; flex-direction: column; gap: 6px; padding: 12px; border-radius: 12px; background: var(--bg-2); border: 1px solid var(--line); }
+.version { font-size: 11px; color: var(--faint); }
+
+.model-status { font-size: 12px; color: var(--muted); line-height: 1.4; }
+.model-status::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--faint); margin-right: 7px; vertical-align: 1px; }
+.model-status[data-state="loading"]::before { background: var(--accent); box-shadow: 0 0 0 0 rgba(245, 184, 61, .6); animation: ring 1.4s infinite; }
+.model-status[data-state="ready"]::before { background: var(--ok); box-shadow: 0 0 10px rgba(95, 211, 155, .6); }
+.model-status[data-state="error"]::before { background: var(--danger); }
+@keyframes pulse { 50% { opacity: .3; } }
+@keyframes ring { 70% { box-shadow: 0 0 0 7px rgba(245, 184, 61, 0); } 100% { box-shadow: 0 0 0 0 rgba(245, 184, 61, 0); } }
+
+.main { min-width: 0; display: flex; flex-direction: column; }
+
+/* ---------- Topbar ---------- */
+.topbar {
+  display: flex; align-items: center; gap: 22px;
+  padding: 12px 24px 12px 16px;
+  position: sticky; top: 0; z-index: 20;
+  background: var(--topbar-surface);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border-bottom: 1px solid var(--line);
+}
+.page-title { min-width: 0; }
+.page-title h2 { font-size: 18px; font-weight: 700; }
+.top-actions { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+.mobile-only, .mobile-nav, #mobilePageTitle { display: none; }
+.top-actions > .mobile-only { display: none; }
+.theme-toggle .theme-moon { display: none; }
+:root[data-theme="light"] .theme-toggle .theme-sun { display: none; }
+:root[data-theme="light"] .theme-toggle .theme-moon { display: block; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+  border: 1px solid var(--line-2); background: var(--panel-2);
+  padding: 8px 15px; border-radius: 10px; cursor: pointer;
+  font-weight: 500; white-space: nowrap; line-height: 1.2;
+  transition: background .15s, border-color .15s, transform .1s, box-shadow .15s, color .15s;
+}
+.btn svg { width: 16px; height: 16px; }
+.btn:hover:not(:disabled) { border-color: rgba(148, 178, 204, 0.4); background: var(--panel-3); }
+.btn:active:not(:disabled) { transform: translateY(1px); }
+.btn:disabled { opacity: .42; cursor: not-allowed; }
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), #f7a13f); color: var(--accent-ink); border-color: transparent; font-weight: 600;
+  box-shadow: 0 6px 18px -8px rgba(245, 170, 61, .8);
+}
+.btn-primary:hover:not(:disabled) { background: linear-gradient(135deg, #ffc756, #ffab4a); border-color: transparent; }
+.btn-secondary {
+  background: rgba(61, 214, 198, 0.14); color: var(--teal); border-color: rgba(61, 214, 198, 0.4); font-weight: 600;
+}
+.btn-secondary:hover:not(:disabled) { background: rgba(61, 214, 198, 0.24); border-color: var(--teal); }
+.btn-teal { background: var(--teal); color: var(--teal-ink); border-color: transparent; font-weight: 600; box-shadow: 0 6px 18px -8px rgba(61, 214, 198, .7); }
+.btn-teal:hover:not(:disabled) { background: #62e3d5; border-color: transparent; }
+.btn-danger { background: rgba(255, 93, 115, .1); color: var(--danger); border-color: rgba(255, 93, 115, .45); }
+.btn-danger:hover:not(:disabled) { background: rgba(255, 93, 115, .18); border-color: var(--danger); }
+.btn-ghost { background: transparent; }
+.btn-sm { padding: 5px 11px; font-size: 12.5px; border-radius: 8px; }
+.btn.danger { color: var(--danger); }
+.btn.is-active { border-color: var(--accent-text); color: var(--accent-text); background: rgba(245, 184, 61, 0.12); }
+.btn-icon { padding: 0; width: 36px; height: 36px; background: transparent; border-color: transparent; }
+.btn-icon:hover:not(:disabled) { background: var(--panel-2); border-color: var(--line); }
+.btn-play {
+  width: 44px; height: 44px; border-radius: 50%; padding: 0; border: 0;
+  background: var(--text); color: var(--bg);
+  box-shadow: 0 6px 18px -6px rgba(232, 238, 244, .5);
+}
+.btn-play:hover:not(:disabled) { background: #fff; }
+.btn-play .i-pause { display: none; }
+.btn-play.is-playing .i-play { display: none; }
+.btn-play.is-playing .i-pause { display: block; }
+
+.pill {
+  display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; font-weight: 600;
+  padding: 3px 10px; border-radius: 99px; background: var(--panel-3); color: var(--muted);
+}
+.pill:empty { display: none; }
+.pill-amber { background: rgba(245, 184, 61, .14); color: var(--accent-text); }
+.pill-teal { background: rgba(61, 214, 198, .14); color: var(--teal); }
+.pill-ok { background: rgba(95, 211, 155, .14); color: var(--ok); }
+.pill-bad { background: rgba(255, 93, 115, .14); color: var(--danger); }
+
+/* ---------- Menu ---------- */
+.menu { position: relative; }
+.menu-list {
+  position: absolute; right: 0; top: calc(100% + 6px); min-width: 220px;
+  background: var(--panel-2); border: 1px solid var(--line-2); border-radius: 12px;
+  padding: 5px; display: flex; flex-direction: column; z-index: 40;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, .6);
+  animation: pop .14s var(--ease);
+}
+.menu-list button { background: none; border: 0; text-align: left; padding: 9px 11px; border-radius: 8px; cursor: pointer; }
+.menu-list button:hover { background: var(--panel-3); }
+@keyframes pop { from { opacity: 0; transform: translateY(-4px) scale(.98); } }
+
+/* ---------- Layout ---------- */
+.layout {
+  display: grid; grid-template-columns: minmax(0, 1fr);
+  gap: 20px; padding: 18px 24px 28px; align-items: start;
+}
+.layout.is-chat-hidden {
+  grid-template-columns: minmax(0, 1fr);
+}
+.workspace { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.tab-panel { display: flex; flex-direction: column; gap: 14px; animation: fadeIn .22s var(--ease); }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } }
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
+
+/* ---------- Card ---------- */
+.card, .transport, .results {
+  background: var(--card-surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow);
+}
+.card { padding: 16px 18px; display: flex; flex-direction: column; gap: 12px; }
+.card-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.card-head h2, .card-head h3 { margin-right: auto; }
+.card-actions { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.stack { display: flex; flex-direction: column; gap: 6px; margin: 10px 0; }
+.stack input, .stack textarea { width: 100%; }
+
+/* ---------- Form controls ---------- */
+select, input[type="text"], input[type="search"], input[type="number"], input[type="password"], input[type="url"], textarea {
+  background: var(--bg-2); border: 1px solid var(--line-2); border-radius: 9px; padding: 7px 10px; color: var(--text);
+  transition: border-color .15s, box-shadow .15s;
+}
+select { padding-right: 28px; appearance: none; -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%238a9db0' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 6px center; background-size: 18px; }
+select:hover, input:hover:not([type="range"]):not([type="checkbox"]), textarea:hover { border-color: rgba(148, 178, 204, .35); }
+select:focus, input:focus, textarea:focus { outline: none; border-color: var(--accent-text); box-shadow: 0 0 0 3px rgba(245, 184, 61, .15); }
+::placeholder { color: var(--faint); }
+output { color: var(--text); font-weight: 600; }
+
+input[type="range"] { -webkit-appearance: none; appearance: none; height: 20px; background: transparent; cursor: pointer; }
+input[type="range"]::-webkit-slider-runnable-track { height: 5px; border-radius: 5px; background: var(--panel-3); }
+input[type="range"]::-moz-range-track { height: 5px; border-radius: 5px; background: var(--panel-3); }
+input[type="range"]::-moz-range-progress { height: 5px; border-radius: 5px; background: var(--accent); }
+input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 15px; height: 15px; margin-top: -5px; border-radius: 50%; background: var(--text); border: 3px solid var(--accent); box-shadow: 0 2px 6px rgba(0,0,0,.4); }
+input[type="range"]::-moz-range-thumb { width: 11px; height: 11px; border-radius: 50%; background: var(--text); border: 3px solid var(--accent); }
+
+.switch { display: inline-flex; align-items: center; gap: 9px; font-size: 13px; color: var(--muted); cursor: pointer; user-select: none; }
+.switch input {
+  -webkit-appearance: none; appearance: none; flex: none; margin: 0;
+  width: 34px; height: 20px; border-radius: 20px; background: var(--panel-3);
+  border: 1px solid var(--line-2); position: relative; cursor: pointer; transition: background .18s, border-color .18s;
+}
+.switch input::after {
+  content: ""; position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; border-radius: 50%;
+  background: var(--muted); transition: transform .18s var(--ease), background .18s;
+}
+.switch input:checked { background: rgba(245, 184, 61, .25); border-color: var(--accent-text); }
+.switch input:checked::after { transform: translateX(14px); background: var(--accent); }
+.switch input:checked + span { color: var(--text); }
+.switch input:disabled { opacity: .45; cursor: not-allowed; }
+.switch-row { display: flex; flex-wrap: wrap; gap: 10px 22px; }
+.switch-col { display: flex; flex-direction: column; gap: 10px; }
+
+/* ---------- Màn hình Video & Camera chiếm ~2/3 trang theo chiều dọc (66vh) ---------- */
+.dropzone {
+  border: 1.5px dashed var(--line-2); border-radius: var(--radius-l);
+  height: var(--media-stage-height); min-height: 0; display: grid; place-items: center;
+  background:
+    repeating-linear-gradient(135deg, rgba(148, 178, 204, .025) 0 12px, transparent 12px 24px),
+    var(--bg-2);
+  transition: border-color .15s, background .15s;
+}
+.dropzone.has-video { border: 0; background: #04070b; min-height: 0; border-radius: var(--radius-l); padding: 6px; }
+.dropzone.has-video .stage { max-height: 100%; }
+.dropzone.is-over { border-color: var(--accent-text); background-color: rgba(245, 184, 61, .05); }
+.dropzone-empty, .camera-idle { text-align: center; padding: 40px 20px; display: flex; flex-direction: column; align-items: center; }
+.drop-icon {
+  width: 64px; height: 64px; border-radius: 18px; display: grid; place-items: center; margin-bottom: 14px;
+  background: linear-gradient(135deg, rgba(245, 184, 61, .18), rgba(255, 138, 76, .12));
+  color: var(--accent-text); box-shadow: inset 0 0 0 1px rgba(245, 184, 61, .25);
+}
+.drop-icon svg { width: 30px; height: 30px; }
+.drop-title { font-size: 18px; font-weight: 600; margin: 0 0 6px; }
+.drop-hint { color: var(--muted); margin: 0 0 18px; max-width: 54ch; }
+.drop-btn-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+
+.stage {
+  position: relative; width: min(100%, calc(66vh * 16 / 9)); min-height: 0; max-height: var(--media-stage-height); aspect-ratio: 16 / 9; margin-inline: auto;
+  background: #000; border-radius: var(--radius-l); overflow: hidden;
+  box-shadow: 0 0 0 1px var(--line), 0 24px 50px -24px rgba(0, 0, 0, .9);
+}
+.stage video, .stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.stage video, .stage canvas { object-fit: contain; }
+.stage canvas { pointer-events: none; }
+.stage.is-sync video { visibility: hidden; }
+.stage-camera { display: grid; place-items: center; width: 100%; height: var(--media-stage-height); min-height: 0; aspect-ratio: auto; background: radial-gradient(circle at 50% 40%, #13202d, #05090d); }
+.camera-idle { position: relative; color: var(--muted); z-index: 2; }
+.camera-idle p:nth-of-type(1) { color: var(--text); font-size: 16px; font-weight: 600; margin: 0 0 4px; }
+.live-badge {
+  position: absolute; top: 12px; left: 12px; background: rgba(5, 9, 13, .78); backdrop-filter: blur(6px);
+  padding: 5px 12px; border-radius: 20px; font-size: 12px; border: 1px solid rgba(255,255,255,.1); z-index: 5;
+}
+.live-badge .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--danger); margin-right: 5px; animation: pulse 1.2s infinite; }
+
+/* ---------- Transport & Input Area ---------- */
+.transport { padding: 12px 16px; }
+.transport-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.transport-spacer { flex: 1; }
+.timecode { color: var(--muted); margin-left: 8px; font-size: 13px; font-family: var(--mono); }
+.timecode span { color: var(--text); font-weight: 600; }
+.rate { display: inline-flex; align-items: center; gap: 7px; color: var(--muted); font-size: 13px; margin-left: 6px; }
+.scrubber { width: 100%; margin: 10px 0 2px; }
+.progress { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--muted); margin-top: 8px; }
+.progress-bar { flex: 1; height: 7px; background: var(--bg-2); border-radius: 7px; overflow: hidden; box-shadow: inset 0 0 0 1px var(--line); }
+.progress-bar span {
+  display: block; height: 100%; width: 0; border-radius: 7px; transition: width .15s linear;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  background-size: 200% 100%; animation: shimmer 1.6s linear infinite;
+}
+@keyframes shimmer { to { background-position: -200% 0; } }
+
+.video-input-card {
+  background: var(--raised-surface);
+  border: 1px solid var(--line-2); border-radius: var(--radius-m); padding: 14px 18px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.video-input-note {
+  background: rgba(245, 184, 61, 0.08); border-left: 3px solid var(--accent);
+  padding: 8px 12px; border-radius: 0 8px 8px 0; font-size: 12.5px; color: var(--text);
+}
+.video-url-form { margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.video-url-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.video-url-row input[type="url"] { flex: 1 1 280px; min-width: 0; }
+.video-url-mode-control, .video-file-actions { display: contents; }
+
+/* ---------- Danh sách Video tải lên & Link đã nhập ---------- */
+.source-list { display: flex; flex-direction: column; gap: 8px; max-height: 280px; overflow-y: auto; }
+.source-item {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  padding: 10px 14px; background: var(--bg-2); border: 1px solid var(--line); border-radius: 10px;
+  transition: border-color .15s;
+}
+.source-item:hover { border-color: var(--line-2); }
+.source-info { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; min-width: 0; flex: 1; }
+.source-title { word-break: break-word; }
+.source-actions { display: flex; gap: 6px; align-items: center; }
+.src-badge {
+  font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.04em;
+}
+.src-url { background: rgba(56, 189, 248, 0.16); color: #38bdf8; }
+.src-file { background: rgba(245, 184, 61, 0.16); color: var(--accent-text); }
+.src-zip { background: rgba(168, 85, 247, 0.18); color: #c084fc; }
+.src-cam { background: rgba(16, 185, 129, 0.16); color: #34d399; }
+.empty-note { padding: 10px 4px; }
+
+/* ---------- Dòng thời gian hành vi ---------- */
+.lanes-wrap { gap: 10px; }
+.lanes-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.lanes-hint { color: var(--muted); font-size: 12px; }
+.lanes { position: relative; display: grid; grid-template-columns: 165px 1fr; row-gap: 5px; }
+.lanes-empty { grid-column: 1 / -1; color: var(--muted); margin: 8px 0; }
+.lane-label { font-size: 12.5px; display: flex; align-items: center; gap: 8px; padding-right: 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lane-label i { width: 10px; height: 10px; border-radius: 3px; flex: none; }
+.lane-track { position: relative; height: 24px; background: var(--bg-2); border-radius: 6px; cursor: pointer; box-shadow: inset 0 0 0 1px var(--line); }
+.lane-seg { position: absolute; min-width: 3px; border-radius: 4px; opacity: .88; border: 0; padding: 0; cursor: pointer; transition: opacity .12s, box-shadow .12s; }
+.lane-seg:hover, .lane-seg:focus-visible { opacity: 1; box-shadow: 0 0 0 2px var(--text), 0 0 12px rgba(255,255,255,.25); }
+.lane-seg.is-alert { outline: 1px solid rgba(255,255,255,.2); animation: pulse 1.6s infinite; }
+.lanes-ruler { grid-column: 2; display: flex; justify-content: space-between; font-size: 11px; color: var(--faint); padding-top: 3px; font-family: var(--mono); }
+.playhead { position: absolute; top: 0; bottom: 18px; width: 2px; background: var(--accent); pointer-events: none; box-shadow: 0 0 10px rgba(245, 184, 61, .7); }
+.playhead::before { content: ""; position: absolute; top: -6px; left: -5px; border: 6px solid transparent; border-top-color: var(--accent-text); }
+
+/* ---------- Camera & 3 Chức năng chính ---------- */
+.cam-chatbot-banner {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  padding: 11px 16px; border-radius: 12px;
+  background: linear-gradient(90deg, rgba(61, 214, 198, 0.12), rgba(245, 184, 61, 0.12));
+  border: 1px solid rgba(61, 214, 198, 0.35);
+}
+.cam-chatbot-link {
+  color: var(--accent-text); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; cursor: pointer;
+}
+.cam-chatbot-link:hover { color: #ffd166; }
+
+.cam-fn-tabs {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+}
+.cam-fn-btn {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 4px;
+  padding: 12px 15px; border-radius: 12px; border: 1px solid var(--line-2);
+  background: var(--panel-2); cursor: pointer; text-align: left; transition: all .16s;
+}
+.cam-fn-btn strong { font-size: 14px; color: var(--text); }
+.cam-fn-btn span { font-size: 12px; color: var(--muted); }
+.cam-fn-btn:hover { background: var(--panel-3); }
+.cam-fn-btn.is-active {
+  background: linear-gradient(135deg, rgba(245, 184, 61, 0.18), rgba(61, 214, 198, 0.1));
+  border-color: var(--accent-text);
+  box-shadow: 0 0 0 1px rgba(245, 184, 61, 0.35);
+}
+.cam-fn-btn.is-active strong { color: var(--accent-text); }
+
+.step-banner {
+  background: rgba(245, 184, 61, 0.1); border: 1px solid rgba(245, 184, 61, 0.35);
+  border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 6px;
+}
+.step-banner-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.step-pill {
+  background: var(--accent); color: var(--accent-ink); font-weight: 700; font-size: 11.5px;
+  padding: 2px 9px; border-radius: 99px;
+}
+.guide-step-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px; }
+.guide-step-item {
+  display: flex; gap: 10px; padding: 10px 12px; border-radius: 10px;
+  background: var(--bg-2); border: 1px solid var(--line); cursor: pointer; transition: all .15s;
+}
+.guide-step-item:hover { border-color: var(--line-2); }
+.guide-step-item.is-active {
+  border-color: var(--accent-text); background: rgba(245, 184, 61, 0.08);
+}
+.guide-step-num {
+  padding: 3px 8px; height: fit-content; border-radius: 7px;
+  background: var(--panel-3); color: var(--accent-text); font-weight: 700; font-size: 11.5px; white-space: nowrap;
+}
+.tiny-badge {
+  display: inline-block; margin-top: 4px; padding: 2px 7px; border-radius: 6px;
+  background: var(--panel-2); color: var(--teal); font-size: 11px;
+}
+
+/* Thang đánh giá độ chính xác */
+.accuracy-overview {
+  display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+  padding: 14px 16px; background: var(--bg-2); border-radius: 12px; border: 1px solid var(--line);
+}
+.accuracy-big-score {
+  font-size: 34px; font-weight: 800; color: var(--accent-text); font-family: var(--mono); min-width: 90px;
+}
+.accuracy-scale-wrap { flex: 1; min-width: 220px; display: flex; flex-direction: column; gap: 6px; }
+.accuracy-scale-bar {
+  height: 14px; background: var(--panel-3); border-radius: 99px; overflow: hidden;
+  box-shadow: inset 0 0 0 1px var(--line-2);
+}
+.accuracy-scale-bar span {
+  display: block; height: 100%; width: 0%; border-radius: 99px; transition: width .25s ease, background .25s ease;
+}
+.accuracy-scale-labels {
+  display: flex; justify-content: space-between; font-size: 11px; color: var(--muted);
+}
+.acc-parts { display: grid; gap: 8px; }
+.acc-part-row {
+  display: grid; grid-template-columns: 150px 1fr 48px; align-items: center; gap: 10px; font-size: 13px;
+}
+.acc-part-bar { height: 8px; background: var(--bg-2); border-radius: 8px; overflow: hidden; }
+.acc-part-bar i { display: block; height: 100%; border-radius: 8px; transition: width .25s; }
+.feedback-list { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
+.feedback-list li { padding: 6px 10px; border-radius: 8px; background: var(--bg-2); list-style: none; border-left: 3px solid var(--accent); }
+.feedback-list li.ok-tip { border-left-color: var(--ok); color: var(--ok); }
+.feedback-list li.warn-tip { border-left-color: var(--danger); }
+
+.voice-box {
+  background: rgba(61, 214, 198, 0.06); border: 1px solid rgba(61, 214, 198, 0.28);
+  border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px;
+}
+.btn.is-recording {
+  background: rgba(255, 93, 115, 0.22); border-color: var(--danger); color: #fff;
+  animation: pulse 1.2s infinite;
+}
+.voice-quote { color: var(--teal); font-style: italic; margin-top: 2px; }
+
+.live-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.live-list li { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; padding: 8px 10px; background: var(--bg-2); border-radius: 10px; border: 1px solid var(--line); }
+.live-list li.muted { background: none; border: 0; padding: 0; }
+.live-list .badge { background: var(--panel-2); padding: 2px 8px; border-radius: 99px; font-size: 12px; }
+.person-tag { font-weight: 700; min-width: 0; margin-right: 4px; }
+
+/* ---------- Bảng Kết quả & Nhãn AI Tạo Sinh Tức Thì ---------- */
+.results { padding: 16px 18px; display: flex; flex-direction: column; gap: 16px; }
+.results-head { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+.summary { display: flex; gap: 8px; color: var(--muted); font-size: 12.5px; flex-wrap: wrap; }
+.summary > * { background: var(--bg-2); padding: 3px 10px; border-radius: 99px; border: 1px solid var(--line); }
+.summary b { color: var(--text); font-weight: 600; }
+.summary .alert { border-color: rgba(255, 93, 115, .4); }
+.summary .alert b { color: var(--danger); }
+
+.type-pill {
+  display: inline-block; padding: 2px 8px; border-radius: 99px; font-size: 11px; font-weight: 600;
+}
+.type-ai { background: rgba(56, 189, 248, 0.16); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.35); }
+.type-core { background: rgba(245, 184, 61, 0.14); color: var(--accent-text); }
+.type-learned { background: rgba(16, 185, 129, 0.15); color: var(--ok); }
+.ai-tag {
+  display: inline-block; margin-left: 5px; padding: 1px 6px; border-radius: 5px;
+  background: rgba(56, 189, 248, 0.2); color: #38bdf8; font-size: 10.5px; font-weight: 700;
+}
+.row-ai-generated { background: rgba(56, 189, 248, 0.04); }
+.table tbody tr.is-idle { opacity: 0.58; }
+
+.chips { display: flex; flex-direction: column; gap: 8px; }
+.chip-group { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.chip-group-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: var(--faint); min-width: 90px; }
+.chip {
+  display: inline-flex; align-items: center; gap: 6px; padding: 4px 11px 4px 9px;
+  border: 1px solid var(--line-2); border-radius: 999px; background: transparent; cursor: pointer; font-size: 12.5px; color: var(--muted);
+  transition: background .15s, color .15s, border-color .15s;
+}
+.chip:hover { color: var(--text); }
+.chip i { width: 8px; height: 8px; border-radius: 50%; }
+.chip[aria-pressed="true"] { color: var(--text); border-color: currentColor; background: var(--panel-2); }
+.chip small { color: var(--muted); }
+
+.filter-row { display: flex; flex-wrap: wrap; gap: 12px 16px; align-items: end; margin-top: 10px; }
+.filter-row label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--muted); }
+.filter-row label.switch { flex-direction: row; align-items: center; padding-bottom: 6px; }
+.filter-row label.grow { flex: 1; min-width: 160px; }
+.filter-row .conf input { width: 140px; }
+
+.table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid var(--line); max-height: 440px; }
+.table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.table th {
+  text-align: left; font-weight: 600; font-size: 11.5px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted);
+  padding: 10px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; user-select: none; background: var(--bg-2);
+  position: sticky; top: 0; z-index: 2;
+}
+.table th.sortable { cursor: pointer; }
+.table th.sortable:hover { color: var(--text); }
+.table th[aria-sort="ascending"]::after { content: " ▲"; font-size: 9px; color: var(--accent-text); }
+.table th[aria-sort="descending"]::after { content: " ▼"; font-size: 9px; color: var(--accent-text); }
+.table td { padding: 8px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.table tbody tr { cursor: pointer; transition: background .12s; }
+.table tbody tr:last-child td { border-bottom: 0; }
+.table tbody tr:hover { background: rgba(148, 178, 204, .06); }
+.table tbody tr.is-current { background: rgba(245, 184, 61, .12); box-shadow: inset 3px 0 0 var(--accent); }
+.table tbody tr.is-alert td:nth-child(5) { color: var(--danger); font-weight: 600; }
+.badge { display: inline-flex; align-items: center; gap: 6px; }
+.badge i { width: 8px; height: 8px; border-radius: 3px; }
+.conf-cell { display: inline-flex; align-items: center; gap: 7px; }
+.conf-cell span.bar { width: 44px; height: 5px; background: var(--bg-2); border-radius: 5px; overflow: hidden; }
+.conf-cell span.bar span { display: block; height: 100%; background: var(--accent); border-radius: 5px; }
+.row-actions { white-space: nowrap; text-align: right; }
+.row-del { background: none; border: 0; color: var(--muted); cursor: pointer; padding: 3px 7px; border-radius: 6px; }
+.row-del:hover { color: var(--danger); background: rgba(255, 93, 115, .1); }
+.row-teach {
+  background: none; border: 1px solid var(--line-2); color: var(--muted);
+  border-radius: 7px; padding: 2px 9px; margin-right: 4px; cursor: pointer; font-size: 12px;
+}
+.row-teach:hover:not(:disabled) { color: var(--accent-text); border-color: var(--accent-text); }
+.row-teach:disabled { opacity: .35; cursor: not-allowed; }
+.table-empty { color: var(--muted); text-align: center; padding: 24px; margin: 0; }
+.pager { display: flex; justify-content: flex-end; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
+
+/* ---------- Tab "Dữ liệu phân tích" (Catalog & Sample Replay) ---------- */
+.catalog-list { display: flex; flex-direction: column; gap: 10px; }
+.catalog-card {
+  display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;
+  padding: 14px 16px; border-radius: 12px; background: var(--bg-2); border: 1px solid var(--line);
+  cursor: pointer; transition: all .15s;
+}
+.catalog-card:hover { border-color: var(--line-2); background: rgba(23, 36, 51, 0.7); }
+.catalog-card.is-selected {
+  border-color: var(--accent-text); background: rgba(245, 184, 61, 0.08);
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+.catalog-card-main { display: flex; flex-direction: column; gap: 5px; flex: 1; min-width: 240px; }
+.catalog-card-title-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.catalog-title { font-size: 15px; font-weight: 700; color: var(--text); }
+.catalog-card-actions { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+
+.sample-replay-grid {
+  display: grid; grid-template-columns: minmax(280px, 460px) minmax(0, 1fr); gap: 16px; align-items: start;
+}
+.sample-replay-box {
+  background: #070c12; border: 1px solid var(--line-2); border-radius: 12px; padding: 10px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.sample-replay-canvas {
+  width: 100%; aspect-ratio: 16 / 9; background: #0d1520; border-radius: 8px; display: block;
+}
+
+.learn-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.learn-list li { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 9px 12px; background: var(--bg-2); border-radius: 10px; border: 1px solid var(--line); }
+.learn-list li.muted { background: none; padding-left: 0; border: 0; }
+.learn-list small { display: block; }
+.swatch { width: 12px; height: 12px; border-radius: 4px; flex: none; }
+.discover-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; }
+.cluster { background: var(--bg-2); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; }
+.cluster header { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+
+/* ---------- Hệ thống & Mục Cài đặt AI riêng biệt ---------- */
+.system-ai-card {
+  border-color: rgba(245, 184, 61, 0.35);
+  background: linear-gradient(180deg, rgba(29, 45, 63, 0.65), rgba(17, 27, 38, 0.95));
+}
+.kv { display: grid; grid-template-columns: minmax(150px, max-content) 1fr; gap: 8px 18px; margin: 0; }
+.kv dt { color: var(--muted); }
+.kv dd { margin: 0; word-break: break-word; }
+.os-tips { display: flex; flex-direction: column; gap: 6px; }
+.os-tips p { background: var(--bg-2); border-left: 3px solid var(--accent); padding: 9px 12px; border-radius: 0 10px 10px 0; font-size: 13px; }
+.os-tips code, .card code { background: var(--panel-3); padding: 1px 6px; border-radius: 5px; font-size: 12.5px; }
+.tier-badge { font-size: 12px; font-weight: 600; padding: 4px 11px; border-radius: 99px; background: var(--panel-2); }
+.tier-badge[data-tier="low"] { background: rgba(255, 93, 115, .15); color: var(--danger); }
+.tier-badge[data-tier="mid"] { background: rgba(245, 184, 61, .15); color: var(--accent-text); }
+.tier-badge[data-tier="high"] { background: rgba(95, 211, 155, .15); color: var(--ok); }
+.settings-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px 16px; }
+.settings-grid label { display: flex; flex-direction: column; gap: 5px; color: var(--muted); font-size: 13px; }
+.settings-grid select, .settings-grid input[type="range"], .settings-grid input[type="text"], .settings-grid input[type="password"], .settings-grid input[type="url"] { width: 100%; }
+.metrics { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 8px; }
+.metrics div { background: var(--bg-2); border: 1px solid var(--line); border-radius: 10px; padding: 9px 12px; display: flex; flex-direction: column; gap: 2px; }
+.metrics span { color: var(--muted); font-size: 11.5px; }
+.metrics b { font-weight: 600; font-size: 14px; word-break: break-word; }
+.spark { width: 100%; height: 70px; background: var(--bg-2); border-radius: 10px; border: 1px solid var(--line); }
+.mini-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.mini-table th, .mini-table td { text-align: left; padding: 7px 9px; border-bottom: 1px solid var(--line); }
+.mini-table th { color: var(--muted); font-weight: 500; }
+.mini-table tr.is-best td { color: var(--accent-text); font-weight: 600; }
+
+/* ---------- Chat ---------- */
+.chat {
+  position: fixed; inset: 0 0 0 auto; z-index: 120;
+  width: var(--chat-width); height: 100vh; height: 100dvh; min-height: 0;
+  background: var(--raised-surface);
+  background-color: var(--bg); border: 1px solid var(--line); border-radius: 0; box-shadow: var(--shadow);
+  display: flex; flex-direction: column; overflow: hidden;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  transform: translateX(0); visibility: visible;
+  transition: transform .28s var(--ease), visibility 0s;
+}
+.chat.is-collapsed {
+  transform: translateX(100%); visibility: hidden; pointer-events: none;
+  transition: transform .28s var(--ease), visibility 0s .28s;
+}
+.chat-backdrop {
+  position: fixed; inset: 0; z-index: 110; background: transparent;
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity .28s var(--ease), visibility 0s .28s;
+}
+body.is-chat-modal { overflow: hidden; }
+body.is-chat-modal .chat-backdrop { opacity: 1; visibility: visible; pointer-events: auto; transition-delay: 0s; }
+body.is-chat-open .chat-fab-btn { visibility: hidden; pointer-events: none; }
+.chat-head { display: flex; flex: none; align-items: center; gap: 11px; padding: 13px 14px; border-bottom: 1px solid var(--line); }
+.chat-avatar { width: 34px; height: 34px; flex-shrink: 0; border-radius: 11px; display: grid; place-items: center; background: linear-gradient(135deg, rgba(61, 214, 198, .25), rgba(245, 184, 61, .2)); color: var(--teal); }
+.chat-title { flex: 1; min-width: 0; }
+.chat-mode { font-size: 11px; color: var(--teal); overflow-wrap: anywhere; display: block; }
+.chat-reset, .chat-toggle { flex-shrink: 0; }
+.chat-toggle { display: inline-flex; }
+.chat-fab-btn {
+  position: fixed; right: 20px; bottom: 20px; z-index: 80;
+  background: #f5b83d; color: #000000; font-weight: 700; font-size: 14px;
+  border: 0; border-radius: 999px; padding: 10px 20px; cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  transition: transform .15s, background .15s, box-shadow .15s;
+}
+.chat-fab-btn:hover { background: #ffc95c; transform: translateY(-1px); box-shadow: 0 10px 28px rgba(0, 0, 0, 0.65); }
+.chat-fab-btn:active { transform: translateY(0); }
+.chat-log { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 14px; display: flex; flex-direction: column; gap: 10px; }
+.msg { max-width: 94%; padding: 9px 13px; border-radius: 14px; line-height: 1.55; word-wrap: break-word; animation: fadeIn .2s var(--ease); }
+.msg p { margin: 0 0 6px; } .msg p:last-child { margin: 0; }
+.msg ul { margin: 4px 0; padding-left: 18px; }
+.msg-bot { background: var(--panel-2); border: 1px solid var(--line); align-self: flex-start; border-top-left-radius: 4px; }
+.msg-user { background: linear-gradient(135deg, var(--accent), #f7a13f); color: var(--accent-ink); align-self: flex-end; border-top-right-radius: 4px; font-weight: 500; }
+.msg a { color: var(--teal); text-decoration: underline; }
+.msg a.t { color: var(--accent-text); cursor: pointer; text-decoration: underline; text-underline-offset: 2px; font-family: var(--mono); }
+.msg-typing { color: var(--muted); font-style: italic; }
+.chat-suggest { display: flex; flex: none; flex-wrap: wrap; gap: 6px; padding: 8px 12px 10px; border-top: 1px solid var(--line); background: var(--suggest-surface); }
+.chat-suggest button { border: 1px solid var(--line-2); background: var(--panel-2); border-radius: 999px; padding: 5px 11px; font-size: 11.5px; cursor: pointer; color: var(--text); transition: all .15s; text-align: left; }
+.chat-suggest button:hover { color: var(--accent-text); border-color: var(--accent-text); background: rgba(245, 184, 61, .08); }
+.chat-input { display: flex; flex: none; gap: 8px; padding: 10px 12px 12px; border-top: 1px solid var(--line); align-items: flex-end; }
+.chat-input textarea { flex: 1; min-width: 0; resize: none; max-height: 120px; border-radius: 12px; }
+.btn-send { width: 40px; height: 38px; padding: 0; border-radius: 12px; }
+
+/* ---------- Dialog / Popup duyệt gói dữ liệu ---------- */
+.dialog {
+  background: var(--panel); color: var(--text); border: 1px solid var(--line-2); border-radius: var(--radius-l);
+  width: min(640px, 94vw); padding: 22px 24px; box-shadow: 0 40px 80px -20px rgba(0, 0, 0, .85);
+}
+.dialog[open] { animation: pop .18s var(--ease); }
+.dialog::backdrop { background: rgba(3, 6, 10, .75); backdrop-filter: blur(4px); }
+.dialog h2 { font-size: 18px; }
+.dialog label:not(.switch) { display: flex; flex-direction: column; gap: 5px; font-size: 13px; color: var(--muted); }
+.pkg-preview-box {
+  background: var(--bg-2); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px;
+  max-height: 190px; overflow-y: auto; font-size: 12.5px; display: flex; flex-direction: column; gap: 6px;
+}
+.dialog-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 18px; flex-wrap: wrap; }
+
+/* ---------- Toast ---------- */
+.toasts { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; gap: 8px; z-index: 100; align-items: center; pointer-events: none; }
+.toast {
+  pointer-events: auto; background: var(--toast-surface); backdrop-filter: blur(8px);
+  border: 1px solid var(--line-2); border-left: 4px solid var(--muted); padding: 10px 16px; border-radius: 12px;
+  box-shadow: 0 16px 34px -10px rgba(0, 0, 0, .7); max-width: min(560px, 90vw); animation: pop .2s var(--ease);
+}
+.toast.ok { border-left-color: var(--ok); }
+.toast.warn { border-left-color: var(--accent-text); }
+.toast.error, .toast.alert { border-left-color: var(--danger); }
+.toast.alert { background: #3a1820; font-weight: 600; }
+
+/* The original dark palette stays intact; these surfaces need light counterparts. */
+:root[data-theme="light"] body { background: #ffffff; }
+:root[data-theme="light"] .dropzone:not(.has-video) { background: repeating-linear-gradient(135deg, rgba(37, 99, 235, .025) 0 12px, transparent 12px 24px), #ffffff; }
+:root[data-theme="light"] .stage { box-shadow: 0 0 0 1px var(--line-2), 0 12px 28px -20px rgba(23, 63, 109, .3); }
+:root[data-theme="light"] .system-ai-card { background: var(--raised-surface); }
+:root[data-theme="light"] .catalog-card:hover { background: var(--panel-2); }
+:root[data-theme="light"] .sample-replay-box { background: var(--bg-2); }
+:root[data-theme="light"] .stage-camera { background: #ffffff; }
+:root[data-theme="light"] .live-badge { color: #e8eef4; }
+:root[data-theme="light"] .toast.alert { background: #fce7eb; }
+:root[data-theme="light"] .btn.is-recording { color: var(--danger); }
+:root[data-theme="light"] .btn-play:hover:not(:disabled) { background: #314c64; }
+:root[data-theme="light"] .btn-teal:hover:not(:disabled) { background: #0a897d; }
+:root[data-theme="light"] :is(.brand h1 span, .pill-amber, .src-file, .type-core, .tier-badge[data-tier="mid"], .warn-text, .cam-chatbot-link, .step-num, .mini-table tr.is-best td, .btn.is-active, .tab.is-active svg, .chat-suggest button:hover, .msg a.t) { color: #946000; }
+:root[data-theme="light"] :is(.src-url, .type-ai, .ai-generated-badge) { color: #086b9b; }
+:root[data-theme="light"] .src-zip { color: #7e33ae; }
+:root[data-theme="light"] .src-cam { color: #087c5a; }
+
+/* ---------- Responsive Đa Nền Tảng (PC & Điện Thoại) ---------- */
+@media (max-width: 1180px) {
+  .layout { grid-template-columns: 1fr; }
+  .chat-toggle { display: inline-flex; }
+  .sample-replay-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 900px) {
+  .brand-sub { display: none; }
+  .topbar { padding: 10px 14px; gap: 12px; }
+  .top-actions .lbl { display: none; }
+  .layout { padding: 12px; gap: 14px; }
+  .cam-fn-tabs { grid-template-columns: 1fr; }
+}
+@media (min-width: 721px) and (max-width: 1100px) {
+  body.is-chat-open:not(.is-chat-modal) .topbar .brand-text { display: none; }
+  body.is-chat-open:not(.is-chat-modal) .topbar { gap: 10px; }
+  body.is-chat-open:not(.is-chat-modal) .page-title h2 { font-size: 16px; }
+  body.is-chat-open:not(.is-chat-modal) .page-title p { display: none; }
+}
+@media (max-width: 720px), (max-width: 960px) and (hover: none) and (pointer: coarse) {
+  .chat { width: calc(100% - 16px); border-radius: var(--radius-m) 0 0 var(--radius-m); }
+}
+@media (max-width: 720px) {
+  :root { --mobile-nav-height: 68px; }
+  html { scroll-padding-top: 64px; scroll-padding-bottom: calc(var(--mobile-nav-height) + 16px); }
+  body { padding-bottom: calc(var(--mobile-nav-height) + env(safe-area-inset-bottom, 0px)); }
+  .mobile-only { display: block; }
+  .topbar { min-height: 56px; padding: 8px 14px; gap: 12px; }
+  .topbar > .brand-bar, #pageTitle { display: none; }
+  .page-title { flex: 1; }
+  #mobilePageTitle { display: block; font-size: 20px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .top-actions { flex: none; gap: 8px; }
+  .top-actions > .btn, .top-actions > .menu > .btn { min-width: 44px; height: 36px; padding: 8px 14px; }
+  .top-actions > .mobile-settings-btn, .top-actions > .theme-toggle { display: inline-flex; min-width: 36px; width: 36px; padding: 8px; }
+  .layout { padding: 14px; gap: 16px; }
+  .workspace, .tab-panel { gap: 16px; }
+  .dropzone { height: auto; min-height: 320px; min-height: clamp(300px, 46svh, 420px); }
+  .stage-camera { height: 54vh; height: 54svh; }
+  .dropzone-empty { width: 100%; padding: 36px 20px; }
+  .drop-icon { width: 60px; height: 60px; margin-bottom: 16px; }
+  .drop-title { font-size: 19px; margin-bottom: 10px; line-height: 1.45; }
+  .drop-hint { font-size: 14px; line-height: 1.65; margin-bottom: 20px; }
+  .drop-btn-row { max-width: 100%; }
+  .drop-btn-row .btn { min-height: 40px; padding: 10px 16px; max-width: 100%; white-space: normal; }
+  #panel-video > .video-input-card { order: 1; padding: 12px 0 0; border: 0; border-radius: 0; background: none; gap: 10px; }
+  #panel-video > #transport { order: 2; }
+  #panel-video > .card { order: 3; }
+  #dropzone:not(.has-video) ~ #transport { display: none; }
+  .video-input-note { display: none; }
+  .video-url-label { font-size: 15px; }
+  .video-url-row { flex-direction: column; align-items: stretch; gap: 10px; }
+  .video-url-row input[type="url"] { flex: none; width: 100%; min-height: 40px; }
+  #videoUrlBtn { order: 1; min-height: 38px; background: transparent; border-color: var(--line-2); color: var(--text); box-shadow: none; }
+  .video-url-hint { order: 2; }
+  .video-url-mode-control { order: 3; display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
+  .video-url-mode-control select { flex: 1 1 180px; min-width: 0; max-width: 100%; min-height: 38px; }
+  .video-url-mode-hint { order: 4; }
+  #videoUrlCancelBtn { order: 5; }
+  .video-file-actions { order: 6; display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+  .video-file-actions .btn { flex: 1 1 140px; min-height: 40px; white-space: normal; text-align: center; }
+  #videoUrlStatus:empty { display: none; }
+  input[type="text"], input[type="search"], input[type="number"], input[type="password"], input[type="url"], select, textarea { font-size: 16px; max-width: 100%; }
+  .grid-2 { grid-template-columns: minmax(0, 1fr); }
+  .card { min-width: 0; padding: 14px; }
+  .rate { min-width: 0; max-width: 100%; flex-wrap: wrap; }
+  .rate select { min-width: 0; width: 100%; }
+  .transport-row > .rate { flex: 1 1 100%; margin-left: 0; }
+  .catalog-card-main { min-width: 0; }
+  .discover-list, .guide-step-list { grid-template-columns: minmax(0, 1fr); }
+  .stage:not(.stage-camera) { min-height: 0; }
+  .dropzone.has-video { min-height: 0; }
+  .mobile-nav {
+    position: fixed; inset: auto 0 0; z-index: 70; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+    height: calc(var(--mobile-nav-height) + env(safe-area-inset-bottom, 0px));
+    padding: 6px max(6px, env(safe-area-inset-right, 0px)) calc(6px + env(safe-area-inset-bottom, 0px)) max(6px, env(safe-area-inset-left, 0px));
+    gap: 4px; background: var(--bg); border-top: 1px solid var(--line);
+  }
+  .mobile-nav .tab { min-width: 0; height: 55px; padding: 7px 2px; flex-direction: column; justify-content: center; gap: 4px; font-size: 12px; line-height: 1.3; text-align: center; border-radius: 10px; }
+  .mobile-nav .tab svg { width: 21px; height: 21px; }
+  .mobile-nav .tab span { max-width: 100%; white-space: nowrap; }
+  .mobile-nav .tab.is-active::before { left: 25%; right: 25%; top: -7px; bottom: auto; width: auto; height: 3px; border-radius: 0 0 3px 3px; }
+  .chat-fab-btn { right: 14px; bottom: calc(var(--mobile-nav-height) + env(safe-area-inset-bottom, 0px) + 14px); padding: 10px 18px; }
+  .chat-head { padding: 10px 12px; gap: 8px; }
+  .chat-toggle, .chat-reset { width: 40px; height: 40px; }
+  .chat-input textarea { min-height: 42px; }
+  .chat-suggest { max-height: 115px; overflow-y: auto; }
+  .toasts { bottom: calc(var(--mobile-nav-height) + env(safe-area-inset-bottom, 0px) + 70px); width: 100%; }
+  .page-title p { display: none; }
+  .lanes { grid-template-columns: 105px 1fr; }
+  .acc-part-row { grid-template-columns: 115px 1fr 42px; }
+  .timecode { margin-left: 0; width: 100%; order: 10; }
+  .kv { grid-template-columns: 1fr; gap: 2px; }
+  .kv dd { margin-bottom: 6px; }
+  .stage { border-radius: var(--radius-m); }
+}
+
+@media (max-height: 480px) {
+  .chat-suggest { max-height: 64px; overflow-y: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .app, .chat, .chat.is-collapsed, .chat-backdrop { transition: none; }
+}
+
+</style>
+<!-- app-styles:end -->
+</head>
+<body>
+<div class="app">
+  <!-- ===== LỚP PHỦ BLUR KHI KÉO MENU CHỨC NĂNG BÊN TRÁI RA ===== -->
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+  <!-- ===== NGĂN KÉO ĐIỀU HƯỚNG 4 CHỨC NĂNG BÊN TRÁI (CÓ NÚT BÊN TRÁI LOGO GIỮ NGUYÊN) ===== -->
+  <aside class="sidebar" id="sidebarPanel">
+    <div class="brand-bar">
+      <button type="button" id="sidebarCloseBtn" class="sidebar-toggle-btn" aria-label="Đóng chức năng bên trái" title="Đóng chức năng bên trái">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg>
+      </button>
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32"><circle cx="16" cy="7" r="3.2" /><path d="M16 11v9M16 14l-6 4M16 14l6-5M16 20l-4 8M16 20l5 7" /></svg>
+        </span>
+        <div class="brand-text">
+          <h1>Behavior<span>Lens</span></h1>
+          <p class="brand-sub">AI Khung xương & Động tác</p>
+        </div>
+      </div>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Chức năng">
+      <button class="tab is-active" role="tab" aria-selected="true" data-tab="video" data-title="Video — Phân tích & Tạo nhãn Mili-giây" data-sub="Khung xương Thân + Đầu + 21 khớp Bàn tay · Đóng gói CSDL .ZIP">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2.5l4-2.5v12l-4-2.5V18a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/></svg><span>Video</span>
+      </button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="camera" data-title="Camera — Hướng dẫn · Kiểm tra · Học chuyển động" data-sub="Animation khung xương từng Step · Chấm điểm độ chính xác · Ghi nhận giọng nói">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4h6l1.5 2H20a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h3.5zM12 9a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg><span>Camera</span>
+      </button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="learn" data-title="Dữ liệu phân tích" data-sub="Danh mục các phân tích · Mẫu video theo thời gian · Học hành vi">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3H4V5zm0 5h16v4H4v-4zm0 6h16v3a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-3z"/></svg><span>Dữ liệu phân tích</span>
+      </button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="system" data-title="Hệ thống & Cài đặt AI" data-sub="Phần cứng · Tối ưu đa nền tảng (≥10 phân tích/s, ≥14 FPS) · Cài đặt Gemini API">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 2v2H7a3 3 0 0 0-3 3v2H2v2h2v2H2v2h2v2a3 3 0 0 0 3 3h2v2h2v-2h2v2h2v-2h2a3 3 0 0 0 3-3v-2h2v-2h-2v-2h2V9h-2V7a3 3 0 0 0-3-3h-2V2h-2v2h-2V2zm0 7h6v6H9z"/></svg><span>Hệ thống</span>
+      </button>
+    </nav>
+    <div class="sidebar-foot">
+      <span id="modelStatus" class="model-status" data-state="idle">Mô hình chưa tải</span>
+      <span class="version" id="appVersion"></span>
+    </div>
+  </aside>
+
+  <!-- ===== NỘI DUNG CHÍNH ===== -->
+  <div class="main">
+    <header class="topbar">
+      <!-- NÚT KHÔNG VIỀN BÊN TRÁI LOGO + LOGO CỐ ĐỊNH GIỮ NGUYÊN -->
+      <div class="brand-bar">
+        <button type="button" id="sidebarToggleBtn" class="sidebar-toggle-btn" aria-label="Mở chức năng bên trái" title="Mở chức năng bên trái">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg>
+        </button>
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32"><circle cx="16" cy="7" r="3.2" /><path d="M16 11v9M16 14l-6 4M16 14l6-5M16 20l-4 8M16 20l5 7" /></svg>
+          </span>
+          <div class="brand-text">
+            <h1>Behavior<span>Lens</span></h1>
+            <p class="brand-sub">AI Khung xương & Động tác</p>
+          </div>
+        </div>
+      </div>
+      <div class="page-title">
+        <h2 id="mobilePageTitle">Video</h2>
+        <h2 id="pageTitle">Video — Phân tích & Tạo nhãn Mili-giây</h2>
+        <p id="pageSub" class="muted small">Khung xương Thân + Đầu + 21 khớp Bàn tay · Đóng gói CSDL .ZIP</p>
+      </div>
+      <div class="top-actions">
+        <label class="btn btn-ghost" title="Nhập kết quả từ file JSON">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4h2v9l3.5-3.5 1.4 1.4L12 16.8l-5.9-5.9 1.4-1.4L11 13zM4 18h16v2H4z"/></svg>
+          <span class="lbl">Nhập JSON</span>
+          <input id="jsonInput" type="file" accept="application/json,.json" hidden />
+        </label>
+        <div class="menu">
+          <button id="exportBtn" class="btn btn-ghost" aria-haspopup="true" aria-expanded="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 16V7l-3.5 3.5-1.4-1.4L12 3.2l5.9 5.9-1.4 1.4L13 7v9zM4 18h16v2H4z"/></svg>
+            <span class="lbl">Xuất kết quả</span>
+          </button>
+          <div id="exportMenu" class="menu-list" hidden>
+            <button data-export="json-all">JSON — toàn bộ</button>
+            <button data-export="json-filtered">JSON — theo bộ lọc</button>
+            <button data-export="csv">CSV — theo bộ lọc</button>
+          </div>
+        </div>
+        <button type="button" id="themeToggle" class="btn btn-icon theme-toggle" aria-label="Chuyển sang chế độ sáng" title="Chuyển sang chế độ sáng" aria-pressed="false">
+          <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 13A9 9 0 0 1 11 3.2 9 9 0 1 0 20.8 13Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        </button>
+        <button type="button" id="mobileSettingsBtn" class="btn btn-icon mobile-only mobile-settings-btn" aria-label="Mở cài đặt hệ thống" title="Cài đặt hệ thống">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m20.1 13.1 1.3 1-.1.7-1.4 2.4-.7.3-1.5-.6-1.9 1.1-.3 1.6-.6.4h-2.8l-.6-.4-.3-1.6-1.9-1.1-1.5.6-.7-.3-1.4-2.4-.1-.7 1.3-1v-2.2l-1.3-1 .1-.7 1.4-2.4.7-.3 1.5.6 1.9-1.1.3-1.6.6-.4h2.8l.6.4.3 1.6 1.9 1.1 1.5-.6.7.3 1.4 2.4.1.7-1.3 1zM13.5 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="workspace">
+        <!-- =====================================================
+             TAB 1: VIDEO (Màn hình chiếm 2/3 chiều dọc trang)
+             ===================================================== -->
+        <div id="panel-video" class="tab-panel" role="tabpanel">
+          <!-- Màn hình hiển thị Video & Khung xương (2/3 chiều dọc) -->
+          <div id="dropzone" class="dropzone">
+            <div class="stage" id="videoStage" hidden>
+              <video id="video" playsinline preload="auto"></video>
+              <canvas id="videoOverlay"></canvas>
+            </div>
+            <div class="dropzone-empty" id="dropEmpty">
+              <div class="drop-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M4 6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2.5l4-2.5v12l-4-2.5V18a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/></svg>
+              </div>
+              <p class="drop-title">Kéo thả video vào đây</p>
+              <p class="drop-hint">MP4, WebM, MOV hoặc gói dữ liệu <b>.ZIP</b>. Chọn tệp trên máy hoặc mở video từ URL bên dưới.</p>
+              <div class="drop-btn-row">
+                <label class="btn btn-primary">
+                  Chọn video / .ZIP
+                  <input id="videoInput" type="file" accept="video/*,.zip,application/zip" hidden />
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Thanh điều khiển ở dưới màn hình: Lại, Qua, Play/Pause, STOP, Tốc độ, và Nút Phân tích -->
+          <div class="transport" id="transport" aria-label="Điều khiển video">
+            <div class="transport-row">
+              <button class="btn btn-sm btn-ghost" data-act="back5" title="Lùi lại 5 giây (←)" aria-label="Lại 5 giây">⏪ Lại</button>
+              <button class="btn btn-icon" data-act="frame-back" title="Lùi 1 khung hình (,)" aria-label="Lùi 1 khung hình">
+                <svg viewBox="0 0 24 24"><path d="M7 5h2v14H7zM18 5v14l-8-7z"/></svg>
+              </button>
+              <button class="btn btn-play" data-act="play" id="playBtn" title="Phát / Tạm dừng (Space)" aria-label="Phát">
+                <svg class="i-play" viewBox="0 0 24 24"><path d="M7 4v16l13-8z"/></svg>
+                <svg class="i-pause" viewBox="0 0 24 24"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
+              </button>
+              <button class="btn btn-sm btn-danger" data-act="stop" id="stopBtn" title="Dừng hẳn & về đầu video (S)" aria-label="Stop">⏹ Stop</button>
+              <button class="btn btn-icon" data-act="frame-fwd" title="Tiến 1 khung hình (.)" aria-label="Tiến 1 khung hình">
+                <svg viewBox="0 0 24 24"><path d="M15 5h2v14h-2zM6 5v14l8-7z"/></svg>
+              </button>
+              <button class="btn btn-sm btn-ghost" data-act="fwd5" title="Qua nhanh 5 giây (→)" aria-label="Qua 5 giây">Qua ⏩</button>
+
+              <span class="timecode"><span id="curTime">00:00.000</span> / <span id="durTime">00:00.000</span></span>
+
+              <label class="rate">
+                Tốc độ
+                <select id="rateSelect">
+                  <option value="0.25">0.25×</option>
+                  <option value="0.5">0.5×</option>
+                  <option value="0.75">0.75×</option>
+                  <option value="1" selected>1×</option>
+                  <option value="1.25">1.25×</option>
+                  <option value="1.5">1.5×</option>
+                  <option value="2">2×</option>
+                </select>
+              </label>
+
+              <label class="switch" title="Hiển thị khung xương Thân + Đầu + 21 khớp Bàn tay">
+                <input type="checkbox" id="overlayToggle" checked />
+                <span>Khung xương (Thân + Đầu + Tay)</span>
+              </label>
+
+              <div class="transport-spacer"></div>
+              <button id="analyzeBtn" class="btn btn-primary" disabled>⚡ Phân tích</button>
+              <button id="cancelBtn" class="btn btn-danger" hidden>Dừng phân tích</button>
+            </div>
+
+            <input id="scrubber" class="scrubber" type="range" min="0" max="0" step="0.005" value="0" aria-label="Vị trí video" />
+
+            <div class="progress" id="progressWrap" hidden>
+              <div class="progress-bar"><span id="progressFill"></span></div>
+              <span id="progressText">0%</span>
+            </div>
+          </div>
+
+          <!-- Khu vực Nhập Link Video (YouTube, TikTok, FB...) & Tải lên Video / File .ZIP kèm Ghi chú hướng dẫn -->
+          <div class="video-input-card">
+            <p class="video-input-note">
+              💡 <b>Hướng dẫn nhập dữ liệu:</b> Dán đường dẫn video từ <b>YouTube, TikTok, Facebook, Instagram</b> hoặc link MP4 trực tiếp vào ô bên dưới; hoặc bấm <b>“Tải lên Video / Gói .ZIP”</b> để chọn video có sẵn trong máy hay nạp lại gói dữ liệu phân tích <code>.zip</code> đã lưu. Sau khi mở video, bấm nút <b>“⚡ Phân tích”</b> để AI tạo nhãn tức thì với độ chính xác đến từng mili-giây.
+            </p>
+            <label for="videoUrlInput" class="video-url-label mobile-only">Video từ URL</label>
+            <form id="videoUrlForm" class="video-url-form">
+              <div class="video-url-row">
+                <input id="videoUrlInput" aria-label="Đường dẫn video" type="url" placeholder="Dán link YouTube, TikTok, Facebook, Reels hoặc đường dẫn MP4 vào đây…" required />
+                <div class="video-url-mode-control">
+                  <label for="videoUrlMode" class="mobile-only">Cách phân tích URL</label>
+                  <select id="videoUrlMode" title="Chế độ đọc video từ link">
+                    <option value="stream">Phát & phân tích trực tiếp</option>
+                    <option value="cache">Tải đệm trên máy chủ</option>
+                  </select>
+                </div>
+                <button id="videoUrlBtn" class="btn btn-primary" type="submit">Mở video URL</button>
+                <p class="mobile-only video-url-hint muted">Video công khai từ YouTube/Shorts, TikTok, Facebook/Reels hoặc URL MP4/WebM. Sau khi mở, bấm “Phân tích”.</p>
+                <p class="mobile-only video-url-mode-hint muted">Chế độ trực tiếp đọc khung hình qua mạng, không chờ tải toàn bộ video. Chọn tải đệm nếu luồng phát kém ổn định.</p>
+                <button id="videoUrlCancelBtn" class="btn btn-danger" type="button" hidden>Hủy mở</button>
+                <div class="video-file-actions">
+                <label class="btn btn-secondary" title="Tải lên file video MP4/WebM/MOV hoặc gói dữ liệu .ZIP">
+                  📂 Tải lên Video / .ZIP
+                  <input type="file" accept="video/*,.zip,application/zip" hidden onchange="document.getElementById('videoInput').files = this.files; document.getElementById('videoInput').dispatchEvent(new Event('change'));" />
+                </label>
+                <button id="downloadCurrentPkgZipBtn" class="btn btn-ghost" type="button" title="Tải gói dữ liệu phân tích về máy dưới dạng thư mục .ZIP">⬇ Tải CSDL (.ZIP)</button>
+                </div>
+              </div>
+              <p id="videoUrlStatus" class="muted small" role="status" aria-live="polite"></p>
+            </form>
+          </div>
+
+          <!-- Kéo xuống dưới: Danh sách chứa các Video tải lên & Tên Link Video nhập vào kèm nút Xóa -->
+          <section class="card">
+            <div class="card-head">
+              <h2>Danh sách Video đã tải lên & Link đã nhập</h2>
+              <span id="videoSourceCount" class="pill pill-amber">0 mục</span>
+            </div>
+            <div id="videoSourceList" class="source-list"></div>
+          </section>
+
+          <!-- Dòng thời gian trực quan -->
+          <div class="lanes-wrap card">
+            <div class="lanes-head">
+              <h2>Dòng thời gian hành vi & Nhãn con AI (Mili-giây)</h2>
+              <span class="lanes-hint">Bấm vào từng phân đoạn màu để tua video tới đúng mili-giây đó</span>
+            </div>
+            <div id="lanes" class="lanes">
+              <p class="lanes-empty">Chưa có kết quả. Tải video hoặc dán link rồi bấm “⚡ Phân tích”, hoặc tải lên gói .ZIP.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- =====================================================
+             TAB 2: CAMERA (3 Chức năng chính + Đường dẫn gọi Chatbot)
+             ===================================================== -->
+        <div id="panel-camera" class="tab-panel" role="tabpanel" hidden>
+          <!-- Màn hình Camera lớn hiển thị Khung xương Thân + Đầu + 21 khớp Bàn tay -->
+          <div class="stage stage-camera" id="cameraStage">
+            <video id="camera" playsinline muted></video>
+            <canvas id="cameraOverlay"></canvas>
+            <div class="camera-idle" id="cameraIdle">
+              <div class="drop-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M9 4h6l1.5 2H20a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h3.5zM12 9a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg>
+              </div>
+              <p>Màn hình Camera Huấn luyện & Kiểm tra Động tác AI</p>
+              <p class="drop-hint">Bấm <b>“Bật camera”</b> để nhận diện khung xương (Thân + Đầu + 21 khớp Bàn tay), hoặc bấm <b>“Bật khung xương hướng dẫn”</b> ở dưới để xem mô phỏng từng Step ngay cả khi chưa mở camera.</p>
+            </div>
+            <div class="live-badge" id="liveBadge" hidden><span class="dot"></span> <span id="fpsText">Đang khởi động</span></div>
+          </div>
+
+          <!-- Điều khiển Camera -->
+          <div class="transport">
+            <div class="transport-row">
+              <label class="rate">Thiết bị Camera
+                <select id="cameraSelect"><option value="">Mặc định</option></select>
+              </label>
+              <button id="camStartBtn" class="btn btn-primary">🎥 Bật camera</button>
+              <button id="camStopBtn" class="btn btn-danger" hidden>⏹ Tắt camera</button>
+              <button id="camSnapBtn" class="btn btn-ghost" disabled>📸 Chụp ảnh</button>
+              <label class="rate">Bài tập / Gói động tác mẫu
+                <select id="camPackageSelect"></select>
+              </label>
+              <div class="transport-spacer"></div>
+              <span class="timecode">Thời gian phiên: <span id="camClock">00:00.000</span></span>
+            </div>
+          </div>
+
+          <!-- Đường dẫn dưới màn hình Camera để gọi Chatbot hướng dẫn bằng chữ tiếng Việt -->
+          <div class="cam-chatbot-banner" id="cameraChatbotBanner">
+            <div>
+              <strong>🤖 Trợ lý AI Hướng dẫn Động tác:</strong>
+              <span id="cameraChatbotContextText" class="small">Cần hướng dẫn chi tiết cách đặt tư thế tay, đầu, vai và các bước thực hiện?</span>
+            </div>
+            <a href="#chat" id="cameraCallChatbotLink" class="cam-chatbot-link">👉 Bấm vào đây để gọi Chatbot đưa ra hướng dẫn động tác bằng chữ tiếng Việt dễ hiểu</a>
+          </div>
+
+          <!-- Thanh chọn 3 Chức năng chính của mục Camera -->
+          <div class="cam-fn-tabs" role="tablist" aria-label="3 Chức năng chính của Camera">
+            <button type="button" class="cam-fn-btn is-active" data-cam-fn="guide" aria-selected="true">
+              <strong>1. 🦴 Hướng dẫn động tác (Step Animation)</strong>
+              <span>Hiển thị khung xương mẫu chuyển động từ từ trên màn hình kèm từng Step</span>
+            </button>
+            <button type="button" class="cam-fn-btn" data-cam-fn="check" aria-selected="false">
+              <strong>2. 🎯 Kiểm tra độ chính xác chuyển động</strong>
+              <span>Thang đánh giá 0–100% & gợi ý những lỗi ở khớp/động tác nào cần sửa</span>
+            </button>
+            <button type="button" class="cam-fn-btn" data-cam-fn="learn" aria-selected="false">
+              <strong>3. 🎙 Học chuyển động mới & Giọng nói</strong>
+              <span>Ghi hình, chỉnh sửa, thu giọng nói mô tả để AI chuẩn hóa & lưu video</span>
+            </button>
+          </div>
+
+          <!-- CHỨC NĂNG CAMERA 1: HƯỚNG DẪN ĐỘNG TÁC (ANIMATION KHUNG XƯƠNG + STEP) -->
+          <section class="card" id="camGuidePanel">
+            <div class="card-head">
+              <h2>Chức năng 1: Hướng dẫn thực hiện động tác (Animation Khung xương & Step)</h2>
+              <div class="card-actions">
+                <button type="button" id="camToggleGuideAnimBtn" class="btn btn-primary btn-sm">▶ Bật khung xương hướng dẫn chuyển động</button>
+                <button type="button" id="camPrevStepBtn" class="btn btn-ghost btn-sm">◀ Step trước</button>
+                <button type="button" id="camNextStepBtn" class="btn btn-ghost btn-sm">Step tiếp ▶</button>
+                <label class="rate small">Tốc độ mẫu
+                  <select id="camGuideSpeedSel">
+                    <option value="0.25">0.25× (Rất chậm)</option>
+                    <option value="0.5" selected>0.5× (Chậm từ từ)</option>
+                    <option value="1">1.0× (Chuẩn)</option>
+                  </select>
+                </label>
+                <label class="switch small">
+                  <input type="checkbox" id="camGuideAutoStepToggle" checked />
+                  <span>Tự chuyển Step</span>
+                </label>
+              </div>
+            </div>
+            <div id="camCurrentStepBanner" class="step-banner"></div>
+            <div id="camGuideStepList" class="guide-step-list"></div>
+          </section>
+
+          <!-- CHỨC NĂNG CAMERA 2: KIỂM TRA ĐỘ CHÍNH XÁC CHUYỂN ĐỘNG -->
+          <section class="card" id="camCheckPanel" hidden>
+            <div class="card-head">
+              <h2>Chức năng 2: Kiểm tra độ chính xác của chuyển động người dùng</h2>
+              <div class="card-actions">
+                <button type="button" id="camStartCheckBtn" class="btn btn-primary">🎯 Kiểm tra động tác ngay</button>
+              </div>
+            </div>
+            <p class="muted small">Sau khi học động tác ở Bước 1, hãy bấm <b>“Kiểm tra động tác ngay”</b> và thực hiện động tác trước camera. Hệ thống sẽ đo góc khớp (Đầu, Vai, Cánh tay, Bàn tay, Hông, Đầu gối) so với mẫu và chỉ rõ lỗi sai.</p>
+
+            <div class="accuracy-overview" id="camAccuracyScale">
+              <div>
+                <div class="small muted">Điểm độ chính xác</div>
+                <div class="accuracy-big-score" id="camAccuracyScoreVal">–%</div>
+                <span class="pill pill-amber" id="camAccuracyGradeBadge">Chưa đo</span>
+              </div>
+              <div class="accuracy-scale-wrap">
+                <div class="small"><b>Thang mức độ đánh giá độ chính xác chuyển động (0% – 100%)</b></div>
+                <div class="accuracy-scale-bar"><span id="camAccuracyScaleFill"></span></div>
+                <div class="accuracy-scale-labels">
+                  <span>0% (Cần sửa nhiều)</span>
+                  <span>50% (Trung bình)</span>
+                  <span>70% (Khá chuẩn)</span>
+                  <span>85%+ (Xuất sắc)</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid-2">
+              <div class="card" style="padding:12px">
+                <h3>Độ chính xác theo từng bộ phận cơ thể</h3>
+                <div id="camAccuracyParts" class="acc-parts">
+                  <p class="muted small">Bấm “Kiểm tra động tác ngay” để xem điểm từng bộ phận.</p>
+                </div>
+              </div>
+              <div class="card" style="padding:12px">
+                <h3>Gợi ý những lỗi ở động tác cần thực hiện đúng hơn</h3>
+                <ul id="camErrorFeedbackList" class="feedback-list">
+                  <li class="muted">Các gợi ý chỉnh sửa khớp tay, vai, lưng, gối sẽ hiện trực tiếp tại đây.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- CHỨC NĂNG CAMERA 3: HỌC CHUYỂN ĐỘNG MỚI & GHI NHẬN GIỌNG NÓI -->
+          <section class="card" id="camLearnPanel" hidden>
+            <div class="card-head">
+              <h2>Chức năng 3: Học chuyển động sáng tạo mới (Ghi hình · Chỉnh sửa · Giọng nói AI)</h2>
+              <span class="pill pill-teal">Hỗ trợ Giọng nói Tiếng Việt</span>
+            </div>
+            <div class="video-input-note">
+              <b>Quy trình 3 bước hướng dẫn học chuyển động mới:</b><br/>
+              • <b>Bước 1 (Ghi hình & Mô tả giọng nói):</b> Nhập tên động tác, bấm <b>“🔴 Bắt đầu ghi hình & thu giọng nói”</b> rồi thực hiện động tác trước camera. Bạn có thể vừa tập vừa nói mô tả (ví dụ: <i>“Bước 1 nâng hai tay ngang vai, bước 2 xoay cổ sang trái”</i>) để AI ghi nhận.<br/>
+              • <b>Bước 2 (Chỉnh sửa & Cắt đoạn):</b> Xem lại video vừa quay, điều chỉnh giây Bắt đầu / Kết thúc (Trim) và chỉnh sửa lời mô tả nếu cần.<br/>
+              • <b>Bước 3 (Phân tích AI & Lưu):</b> Bấm <b>“✨ Phân tích AI & Tinh chỉnh theo giọng nói”</b> để AI chuẩn hóa khung xương, tạo các Step và lưu vào mục Video hành vi người dùng.
+            </div>
+
+            <div class="filter-row">
+              <label class="grow">Tên động tác mới
+                <input id="camLearnMoveName" type="text" placeholder="Ví dụ: Bài tập xoay vai mở khớp tay sáng tạo" />
+              </label>
+              <button type="button" id="camRecordNewBtn" class="btn btn-primary">🔴 Bắt đầu ghi hình & thu giọng nói</button>
+              <button type="button" id="camStopRecordBtn" class="btn btn-danger" hidden>⏹ Dừng ghi hình</button>
+              <button type="button" id="camVoiceBtn" class="btn btn-secondary">🎙 Bật micro mô tả động tác bằng giọng nói</button>
+            </div>
+
+            <div class="voice-box">
+              <label for="camVoiceTranscript"><b>🎙 Nội dung mô tả động tác bằng giọng nói (Model AI sẽ dùng để chỉnh sửa nhãn & Step chuẩn hơn):</b></label>
+              <textarea id="camVoiceTranscript" rows="2" placeholder="Khi bạn nói vào micro (hoặc gõ tại đây), nội dung mô tả từng bước động tác sẽ được AI ghi nhận để tinh chỉnh dữ liệu khung xương chuẩn xác hơn…"></textarea>
+            </div>
+
+            <div id="camRecordedPreviewWrap" class="card" hidden style="padding:12px">
+              <h3>Xem trước & Chỉnh sửa video hành vi vừa quay</h3>
+              <video id="camRecordedPreviewVideo" controls playsinline style="max-height:240px;border-radius:10px;background:#000"></video>
+            </div>
+
+            <div class="filter-row">
+              <label>Cắt từ giây (Trim Start)
+                <input id="camTrimStart" type="number" step="0.1" min="0" value="0" style="width:110px" />
+              </label>
+              <label>Đến giây (Trim End)
+                <input id="camTrimEnd" type="number" step="0.1" min="0.5" value="10" style="width:110px" />
+              </label>
+              <button type="button" id="camAnalyzeRecordedBtn" class="btn btn-primary" disabled>✨ Phân tích AI & Tinh chỉnh theo giọng nói</button>
+            </div>
+            <p id="camLearnStatus" class="small muted"></p>
+
+            <!-- Mục chứa các video quay hành vi người dùng -->
+            <div class="card" style="padding:14px;margin-top:8px">
+              <div class="card-head">
+                <h3>📹 Danh sách các Video quay hành vi người dùng</h3>
+              </div>
+              <div id="userVideoList" class="source-list"></div>
+            </div>
+          </section>
+
+          <!-- Trạng thái phát hiện trực tiếp -->
+          <section class="card">
+            <h2>Nhãn hành vi & Góc khớp đang phát hiện trên Camera</h2>
+            <ul id="liveList" class="live-list">
+              <li class="muted">Chưa có người trong khung hình.</li>
+            </ul>
+          </section>
+        </div>
+
+        <!-- =====================================================
+             TAB 3: DỮ LIỆU PHÂN TÍCH (Đổi tên từ "Học hành vi")
+             ===================================================== -->
+        <div id="panel-learn" class="tab-panel" role="tabpanel" hidden>
+          <!-- Danh mục các Phân tích -->
+          <section class="card">
+            <div class="card-head">
+              <h2>📂 Danh mục các Phân tích (Cơ sở dữ liệu Gói Động tác)</h2>
+              <span id="catalogCountBadge" class="pill pill-amber">0 gói phân tích</span>
+              <div class="card-actions">
+                <label class="btn btn-secondary btn-sm">
+                  📦 Nhập gói .ZIP vào Danh mục
+                  <input id="catalogZipInput" type="file" accept=".zip,application/zip" hidden />
+                </label>
+              </div>
+            </div>
+            <p class="muted small">Bấm vào bất kỳ gói phân tích nào bên dưới để xem <b>Bảng các nhãn hành vi có trong phân tích</b> cùng <b>Mẫu video phân tích & Bảng hành vi liệt kê theo thời gian của video</b>.</p>
+            <div id="packageCatalogList" class="catalog-list"></div>
+          </section>
+
+          <!-- Chi tiết khi bấm vào từng phân tích -->
+          <section class="card" id="packageDetailSection">
+            <div class="card-head">
+              <div>
+                <h2 id="selectedPkgTitle">Chi tiết Gói Phân tích</h2>
+                <p id="selectedPkgMeta" class="muted small"></p>
+              </div>
+            </div>
+            <p id="selectedPkgSummary" class="small"></p>
+
+            <!-- (1) Bảng các nhãn hành vi có trong phân tích -->
+            <h3>1. Bảng các nhãn hành vi có trong phân tích</h3>
+            <div class="table-wrap">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Nhãn hành vi</th>
+                    <th>Phân loại</th>
+                    <th>Số lần xuất hiện</th>
+                    <th>Tổng thời lượng</th>
+                    <th>Độ tin cậy TB</th>
+                    <th>Hướng dẫn thực hiện & Góc khớp</th>
+                  </tr>
+                </thead>
+                <tbody id="pkgBehaviorSummaryTableBody"></tbody>
+              </table>
+            </div>
+
+            <!-- (2) Mẫu video phân tích + Bảng các hành vi được liệt kê theo thời gian của video -->
+            <h3 style="margin-top:10px">2. Mẫu video phân tích (Mô phỏng khung xương) & Bảng hành vi theo thời gian của video</h3>
+            <div class="sample-replay-grid">
+              <div class="sample-replay-box">
+                <canvas id="pkgSampleReplayCanvas" class="sample-replay-canvas" width="640" height="360"></canvas>
+                <div class="transport-row">
+                  <button type="button" id="pkgReplayPlayBtn" class="btn btn-primary btn-sm">▶ Phát mẫu phân tích</button>
+                  <button type="button" id="pkgReplayStopBtn" class="btn btn-ghost btn-sm">⏹ Đầu</button>
+                  <span id="pkgReplayTime" class="mono small muted">00:00.000 / 00:00.000</span>
+                </div>
+                <input id="pkgReplayScrubber" type="range" min="0" max="10" step="0.02" value="0" />
+              </div>
+
+              <div class="table-wrap">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Bắt đầu (Giây/Ms)</th>
+                      <th>Kết thúc (Giây/Ms)</th>
+                      <th>Thời lượng</th>
+                      <th>Nhãn hành vi trong mẫu</th>
+                      <th>Chi tiết Góc khớp & Hướng dẫn</th>
+                      <th>Tin cậy</th>
+                    </tr>
+                  </thead>
+                  <tbody id="pkgTimelineTableBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <!-- Duy trì đầy đủ chức năng Học hành vi bên dưới -->
+          <section class="card">
+            <div class="card-head">
+              <h2>Chức năng Học hành vi & Quản lý mẫu tự dạy (KNN / MLP)</h2>
+              <div class="card-actions">
+                <label class="btn btn-ghost btn-sm">Nhập gói mẫu (.json)
+                  <input id="packImport" type="file" accept=".json,application/json" hidden />
+                </label>
+                <button id="packExport" class="btn btn-ghost btn-sm">Xuất gói mẫu (.json)</button>
+              </div>
+            </div>
+            <ul id="learnList" class="learn-list"></ul>
+            <datalist id="learnedNames"></datalist>
+
+            <div class="filter-row">
+              <label>Thuật toán
+                <select id="trainAlgo">
+                  <option value="auto">Tự động</option>
+                  <option value="knn">KNN (k láng giềng)</option>
+                  <option value="mlp">MLP (mạng nơ-ron)</option>
+                </select>
+              </label>
+              <label class="conf">Ngưỡng tin cậy <output id="learnThresholdOut">70%</output>
+                <input id="learnThreshold" type="range" min="40" max="95" step="5" value="70" />
+              </label>
+              <label class="switch"><input type="checkbox" id="useLearned" /> <span>Dùng khi phân tích</span></label>
+              <label class="switch"><input type="checkbox" id="selfTrain" /> <span>Tự học từ video mới</span></label>
+              <button id="trainBtn" class="btn btn-primary btn-sm">Huấn luyện bộ phân loại</button>
+              <button id="applyLearnedBtn" class="btn btn-ghost btn-sm">Áp dụng lên video hiện tại</button>
+            </div>
+            <div class="progress" id="trainProgressWrap" hidden>
+              <div class="progress-bar"><span id="trainProgressFill"></span></div>
+              <span id="trainProgressText"></span>
+            </div>
+            <p id="trainResult" class="small"></p>
+          </section>
+
+          <section class="card">
+            <h2>Dạy từ khoảng thời gian trong Video & Tự khám phá cụm chuyển động</h2>
+            <div class="filter-row">
+              <label>Người <select id="tvPerson"></select></label>
+              <label>Từ <input id="tvFrom" type="text" size="6" placeholder="0:00" /></label>
+              <label>Đến <input id="tvTo" type="text" size="6" placeholder="0:05" /></label>
+              <label class="grow">Tên hành vi <input id="tvName" type="text" list="learnedNames" placeholder="vd: Động tác tay mới" /></label>
+              <label class="switch"><input type="checkbox" id="tvRelabel" checked /> <span>Thêm đoạn này vào kết quả</span></label>
+              <button id="tvBtn" class="btn btn-primary btn-sm">Thêm mẫu</button>
+              <select id="discoverK" aria-label="Số cụm">
+                <option value="0">Tự chọn số cụm</option>
+                <option value="3">3 cụm</option>
+                <option value="4">4 cụm</option>
+                <option value="5">5 cụm</option>
+              </select>
+              <button id="discoverBtn" class="btn btn-secondary btn-sm">Khám phá cụm mới</button>
+            </div>
+            <p id="discoverStatus" class="small"></p>
+            <div id="discoverList" class="discover-list"></div>
+          </section>
+        </div>
+
+        <!-- =====================================================
+             TAB 4: HỆ THỐNG (Phần cứng, Tối ưu đa nền tảng, Log CSV,
+             và Mục Riêng: Cài đặt Mô hình AI & Gemini API)
+             ===================================================== -->
+        <div id="panel-system" class="tab-panel" role="tabpanel" hidden>
+          <!-- MỤC RIÊNG TÁCH BIỆT: CÀI ĐẶT MÔ HÌNH AI & GOOGLE GEMINI API (Gộp từ góc trên bên phải) -->
+          <section class="card system-ai-card" id="systemAiSettingsSection">
+            <div class="card-head">
+              <h2>⚙ Cài đặt AI</h2>
+              <span class="pill pill-amber">Gemini miễn phí</span>
+            </div>
+            <div class="settings-grid">
+              <label>Mô hình
+                <select id="setModelType">
+                  <option value="multi">Nhiều người (nhanh)</option>
+                  <option value="single">1 người (chính xác)</option>
+                </select>
+              </label>
+              <label>Độ nhạy: <output id="setMinScoreOut">0.25</output>
+                <input id="setMinScore" type="range" min="0.1" max="0.6" step="0.05" value="0.25" />
+              </label>
+              <label>Lấy mẫu
+                <select id="setSampleInterval">
+                  <option value="0.05">50 ms</option>
+                  <option value="0.1" selected>100 ms</option>
+                  <option value="0.2">200 ms</option>
+                  <option value="0.25">250 ms</option>
+                </select>
+              </label>
+              <label>Nhà cung cấp
+                <select id="setLlmProvider">
+                  <option value="gemini" selected>Gemini (miễn phí)</option>
+                  <option value="openai">OpenAI</option>
+                  <option value="groq">Groq</option>
+                  <option value="anthropic">Claude</option>
+                </select>
+              </label>
+              <label>API Key
+                <input id="setLlmKey" type="password" placeholder="AIzaSy..." autocomplete="off" />
+              </label>
+              <label>Model
+                <input id="setLlmModel" type="text" list="modelList" value="gemini-2.5-flash" placeholder="gemini-2.5-flash" />
+                <datalist id="modelList">
+                  <option value="gemini-2.5-flash"></option>
+                  <option value="gemini-2.0-flash"></option>
+                  <option value="gemini-1.5-flash"></option>
+                </datalist>
+              </label>
+              <label>Endpoint
+                <input id="setLlmEndpoint" type="url" value="https://generativelanguage.googleapis.com/v1beta" />
+              </label>
+            </div>
+            <div class="switch-row">
+              <label class="switch"><input type="checkbox" id="setGoogleSearch" checked /> <span>Tìm Google</span></label>
+              <label class="switch"><input type="checkbox" id="setDetectObjects" checked /> <span>Nhận diện đồ vật</span></label>
+            </div>
+            <div class="transport-row">
+              <button type="button" id="saveSystemAiSettingsBtn" class="btn btn-primary">💾 Lưu</button>
+              <button type="button" id="testLlmBtn" class="btn btn-secondary">🔌 Kiểm tra</button>
+              <span id="llmTestResult" class="small muted"></span>
+            </div>
+            <p id="proxyNote" class="muted small"></p>
+          </section>
+
+          <!-- TỐI ƯU HIỆU NĂNG ĐA NỀN TẢNG -->
+          <section class="card">
+            <div class="card-head">
+              <h2>Hiệu năng</h2>
+              <span class="pill pill-ok">≥10/s · ≥14 FPS</span>
+            </div>
+            <div class="settings-grid">
+              <label>Mức cấu hình
+                <select id="perfProfile">
+                  <option value="auto">Tự động</option>
+                  <option value="eco">Thấp</option>
+                  <option value="balanced">Trung bình</option>
+                  <option value="quality">Cao</option>
+                </select>
+              </label>
+              <label>Backend
+                <select id="backendSel">
+                  <option value="auto">Tự động</option>
+                  <option value="webgpu">WebGPU</option>
+                  <option value="webgl">WebGL</option>
+                  <option value="wasm">WASM</option>
+                  <option value="cpu">CPU</option>
+                </select>
+              </label>
+              <label>Luồng
+                <select id="threadSel">
+                  <option value="auto">Tự động</option>
+                  <option value="worker">Worker</option>
+                  <option value="main">Luồng chính</option>
+                </select>
+              </label>
+              <label>Đồng bộ
+                <select id="renderModeSel">
+                  <option value="auto">Tự động</option>
+                  <option value="live">Mượt</option>
+                  <option value="sync">Từng khung</option>
+                </select>
+              </label>
+              <label>Làm mượt <output id="smoothOut">45%</output>
+                <input id="smoothRange" type="range" min="0" max="100" step="5" />
+              </label>
+            </div>
+            <div class="switch-row">
+              <label class="switch"><input type="checkbox" id="interpToggle" checked /> <span>Nội suy</span></label>
+              <label class="switch"><input type="checkbox" id="adaptiveToggle" checked /> <span>Tự điều tốc</span></label>
+              <label class="switch"><input type="checkbox" id="pauseHiddenToggle" checked /> <span>Dừng khi ẩn tab</span></label>
+              <label class="switch"><input type="checkbox" id="batteryToggle" checked /> <span>Tiết kiệm pin</span></label>
+            </div>
+            <p id="profileDetail" class="muted small"></p>
+          </section>
+
+          <!-- THEO DÕI THỜI GIAN THỰC & XUẤT LOG CSV -->
+          <section class="card">
+            <div class="card-head">
+              <h2>Theo dõi hiệu năng</h2>
+              <div class="card-actions">
+                <button id="perfLogBtn" class="btn btn-primary btn-sm">📥 Xuất log CSV</button>
+              </div>
+            </div>
+            <div id="metrics" class="metrics"></div>
+            <canvas id="perfSpark" class="spark" height="70" aria-label="Biểu đồ thời gian suy luận"></canvas>
+          </section>
+
+          <!-- PHẦN CỨNG & BENCHMARK -->
+          <div class="grid-2">
+            <section class="card">
+              <div class="card-head">
+                <h2>Phần cứng</h2>
+                <span id="tierBadge" class="tier-badge"></span>
+              </div>
+              <dl id="hwTable" class="kv"></dl>
+              <div id="osTips" class="os-tips"></div>
+            </section>
+
+            <section class="card">
+              <div class="card-head">
+                <h2>Benchmark</h2>
+                <div class="card-actions">
+                  <button id="benchBtn" class="btn btn-secondary btn-sm">Chạy đo</button>
+                </div>
+              </div>
+              <p id="benchStatus" class="small"></p>
+              <div id="benchTable"></div>
+            </section>
+          </div>
+        </div>
+
+        <!-- =====================================================
+             KHU VỰC PHÂN TÍCH Ở DƯỚI VIDEO & CAMERA:
+             • BẢNG 1: Bảng Hành vi Gốc Tinh Gọn & Nhãn Con Do AI Tạo Sinh Tức Thì
+             • BẢNG 2: Bảng Ghi Thời Gian Cụ Thể (Mili-giây / Giây) Của Từng Nhãn
+             ===================================================== -->
+        <section class="results" id="resultsSection" aria-labelledby="resultsTitle">
+          <div class="results-head">
+            <h2 id="resultsTitle">Mục Phân tích Hành vi & Nhãn Động tác Chi tiết (Mili-giây)</h2>
+            <div class="summary" id="summary"></div>
+          </div>
+
+          <!-- BẢNG 1: Bảng thể hiện các Hành vi Gốc tinh gọn + Nhãn Con do Model AI Tạo Sinh Tức Thì -->
+          <div class="card" style="padding:14px">
+            <div class="card-head">
+              <h3>1. Bảng Hành vi Gốc & Nhãn Con Do Model AI Tạo Sinh Tức Thì</h3>
+              <span id="aiGeneratedCountBadge" class="pill pill-teal">0 nhãn AI tạo sinh</span>
+            </div>
+            <p class="muted small">Chỉ giữ lại bộ hành vi gốc cốt lõi và tự động bổ sung tức thì các <b>nhãn con chi tiết do AI phân tích</b> (góc khớp tay, ngón tay, đầu, vai, gối) ngay trong lúc video đang chạy phân tích.</p>
+            <div class="table-wrap">
+              <table class="table" id="coreBehaviorTable">
+                <thead>
+                  <tr>
+                    <th>Nhãn hành vi / Động tác</th>
+                    <th>Nguồn tạo nhãn</th>
+                    <th>Số lần</th>
+                    <th>Tổng thời lượng</th>
+                    <th>Tin cậy TB</th>
+                    <th>Hướng dẫn động tác & Góc khớp chi tiết</th>
+                    <th>Lọc nhanh</th>
+                  </tr>
+                </thead>
+                <tbody id="coreBehaviorTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Bộ lọc -->
+          <div class="filters" id="filters">
+            <div class="chips" id="behaviorChips" aria-label="Lọc theo hành vi"></div>
+            <div class="filter-row">
+              <label>Người
+                <select id="fPerson"><option value="">Tất cả</option></select>
+              </label>
+              <label>Nguồn
+                <select id="fSource">
+                  <option value="">Tất cả</option>
+                  <option value="video">Video</option>
+                  <option value="camera">Camera</option>
+                </select>
+              </label>
+              <label>Từ giây
+                <input id="fFrom" type="text" inputmode="decimal" placeholder="0:00" size="6" />
+              </label>
+              <label>Đến giây
+                <input id="fTo" type="text" inputmode="decimal" placeholder="cuối" size="6" />
+              </label>
+              <label class="conf">Độ tin cậy ≥ <output id="fConfOut">0%</output>
+                <input id="fConf" type="range" min="0" max="100" step="5" value="0" />
+              </label>
+              <label class="grow">Tìm kiếm nhãn / góc khớp
+                <input id="fSearch" type="search" placeholder="vd: vươn tay, gập gối, nghiêng đầu…" />
+              </label>
+              <button id="fReset" class="btn btn-ghost btn-sm">Xoá lọc</button>
+            </div>
+          </div>
+
+          <!-- BẢNG 2: Bảng ghi thời gian cụ thể của từng nhãn được phân tích ở giây/mili-giây nào có trong video -->
+          <div class="card" style="padding:14px">
+            <div class="card-head">
+              <h3>2. Bảng Thời gian Cụ thể Của Từng Nhãn Trong Video (Độ chính xác Mili-giây)</h3>
+              <span class="muted small">Bấm vào dòng bất kỳ để tua video đến đúng mili-giây đó</span>
+            </div>
+            <div class="table-wrap">
+              <table class="table" id="resultTable">
+                <thead>
+                  <tr>
+                    <th data-sort="start" class="sortable">Bắt đầu (mm:ss.mmm)</th>
+                    <th data-sort="end" class="sortable">Kết thúc (mm:ss.mmm)</th>
+                    <th data-sort="duration" class="sortable">Thời lượng (ms)</th>
+                    <th data-sort="personId" class="sortable">Người</th>
+                    <th data-sort="behavior" class="sortable">Nhãn hành vi & Nhãn con AI</th>
+                    <th>Chi tiết Khung xương / Góc khớp</th>
+                    <th data-sort="confidence" class="sortable">Tin cậy</th>
+                    <th>Thao tác</th>
+                  </tr>
+                </thead>
+                <tbody id="resultBody"></tbody>
+              </table>
+              <p class="table-empty" id="tableEmpty">Chưa có dữ liệu để hiển thị.</p>
+            </div>
+            <div class="pager" id="pager"></div>
+          </div>
+        </section>
+      </section>
+
+      <!-- =====================================================
+           CHATBOT AI HƯỚNG DẪN ĐỘNG TÁC & TRA CỨU GOOGLE
+           ===================================================== -->
+
+    </main>
+    <nav class="mobile-nav" role="tablist" aria-label="Điều hướng trên điện thoại">
+      <button class="tab is-active" role="tab" aria-selected="true" data-tab="video">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2.5l4-2.5v12l-4-2.5V18a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/></svg><span>Video</span>
+      </button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="camera">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4h6l1.5 2H20a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h3.5zM12 9a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg><span>Camera</span>
+      </button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="learn">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3H4V5zm0 5h16v4H4v-4zm0 6h16v3a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-3z"/></svg><span>Học hành vi</span>
+      </button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="system">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 2v2H7a3 3 0 0 0-3 3v2H2v2h2v2H2v2h2v2a3 3 0 0 0 3 3h2v2h2v-2h2v2h2v-2h2a3 3 0 0 0 3-3v-2h2v-2h-2v-2h2V9h-2V7a3 3 0 0 0-3-3h-2V2h-2v2h-2V2zm0 7h6v6H9z"/></svg><span>Hệ thống</span>
+      </button>
+    </nav>
+  </div>
+</div>
+<div id="chatBackdrop" class="chat-backdrop" aria-hidden="true"></div>
+      <aside class="chat is-collapsed" id="chat" role="dialog" aria-modal="true" aria-labelledby="chatHeading" aria-hidden="true" inert>
+        <div class="chat-head">
+          <span class="chat-avatar" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 2a2 2 0 0 1 1 3.7V7h4a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3v-7a3 3 0 0 1 3-3h4V5.7A2 2 0 0 1 12 2zM9 11.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm6 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/></svg>
+          </span>
+          <div class="chat-title">
+            <h2 id="chatHeading">Trợ lý AI</h2>
+            <span class="chat-mode" id="chatMode">Gemini + Google</span>
+          </div>
+          <button type="button" class="btn btn-icon chat-reset" id="chatReset" aria-label="Làm mới cuộc trò chuyện" title="Làm mới cuộc trò chuyện">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.4 6.7M20 4v7h-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button type="button" class="btn btn-icon chat-toggle" id="chatToggle" aria-label="Đóng trợ lý" title="Đóng trợ lý">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+        <div class="chat-log" id="chatLog" aria-live="polite"></div>
+        <!-- Các câu gợi ý luôn hiện ở dưới Chatbot -->
+        <div class="chat-suggest" id="chatSuggest"></div>
+        <form class="chat-input" id="chatForm" autocomplete="off">
+          <textarea id="chatText" aria-label="Tin nhắn cho trợ lý" rows="1" placeholder="Hỏi về động tác…"></textarea>
+          <button class="btn btn-primary btn-send" type="submit" aria-label="Gửi">
+            <svg viewBox="0 0 24 24"><path d="M3 20.5 21 12 3 3.5V10l12 2-12 2z"/></svg>
+          </button>
+        </form>
+      </aside>
+
+<!-- ===== NÚT TRỢ LÝ MÀU VÀNG CHỮ ĐEN Ở GÓC DƯỚI BÊN PHẢI ===== -->
+<button type="button" id="chatFabBtn" class="chat-fab-btn" aria-controls="chat" aria-expanded="false" aria-label="Mở Trợ lý AI" title="Ẩn/hiện Trợ lý AI">
+  Trợ lý
+</button>
+
+<!-- ===== POPUP DUYỆT & ĐỔI TÊN NHÁP GÓI DỮ LIỆU DO AI ĐỀ XUẤT SAU KHI PHÂN TÍCH ===== -->
+<dialog id="packageApproveDialog" class="dialog">
+  <form method="dialog">
+    <h2>📦 Đóng gói Chuỗi Động tác & Duyệt Tên Nháp Do AI Đề xuất</h2>
+    <p class="muted small" style="margin-top:4px">
+      Quá trình phân tích đã hoàn tất! Tất cả các nhãn con và dữ liệu khung xương (mili-giây) đã được đóng gói vào một nhãn chuỗi động tác cha. <b>Model AI đã đặt tên nháp bên dưới</b> — bạn có thể giữ nguyên hoặc đổi lại tên trước khi duyệt lưu vào CSDL và tải về máy (file <code>.zip</code>).
+    </p>
+
+    <label class="stack">
+      <b>Tên gói chuỗi động tác (AI đặt nháp — bạn có thể sửa lại):</b>
+      <input id="pkgDraftNameInput" type="text" required placeholder="Nhập tên gói chuỗi động tác…" />
+    </label>
+
+    <label class="stack">
+      <b>Mô tả tóm tắt & Hướng dẫn tổng quan:</b>
+      <textarea id="pkgDraftSummaryInput" rows="2"></textarea>
+    </label>
+
+    <div id="pkgDraftPreviewStats" class="pkg-preview-box"></div>
+
+    <div class="dialog-actions">
+      <button type="button" id="pkgCancelBtn" class="btn btn-ghost">Bỏ qua</button>
+      <button type="button" id="pkgApproveBtn" class="btn btn-secondary">✓ Duyệt & Lưu vào CSDL</button>
+      <button type="button" id="pkgApproveZipBtn" class="btn btn-primary">⬇ Duyệt, Lưu CSDL & Tải về máy (.ZIP)</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- ===== DIALOG DẠY TỪ ĐOẠN ===== -->
+<dialog id="teachDialog" class="dialog">
+  <form method="dialog">
+    <h2>Dạy hành vi từ đoạn này</h2>
+    <p id="teachInfo" class="muted small"></p>
+    <label class="stack">Tên hành vi
+      <input id="teachDlgName" type="text" list="learnedNames" required placeholder="vd: Động tác vươn tay mở khớp" />
+    </label>
+    <label class="switch"><input type="checkbox" id="teachDlgRelabel" checked /> <span>Đổi nhãn đoạn này thành hành vi vừa dạy</span></label>
+    <div class="dialog-actions">
+      <button value="cancel" class="btn btn-ghost" formnovalidate>Huỷ</button>
+      <button value="save" class="btn btn-primary">Thêm mẫu & huấn luyện</button>
+    </div>
+  </form>
+</dialog>
+
+<div id="toasts" class="toasts" aria-live="assertive"></div>
+
+<div id="bootNotice" role="alert" hidden style="position:fixed;bottom:20px;left:20px;right:20px;z-index:10000;padding:16px;background:#182530;color:#fff;border:1px solid #f5ad32;border-radius:12px">
+  <strong>Không khởi động được ứng dụng.</strong>
+  <p id="bootError">Không tải được mã ứng dụng. Kiểm tra kết nối tới máy chủ rồi thử lại.</p>
+  <button id="bootRetry" type="button" class="btn btn-primary">Tải lại trang</button>
+</div>
+<noscript>Ứng dụng cần JavaScript. Bật JavaScript cho trang này rồi tải lại.</noscript>
+<script type="module" id="appLoader" data-entry="./js/app.bundle.js?v=3.0.4">
+  document.getElementById('bootRetry').addEventListener('click', () => location.reload());
+  import(document.getElementById('appLoader').dataset.entry).catch((error) => {
+    console.error('Không tải được mã khởi động:', error);
+    document.getElementById('modelStatus').textContent = 'Lỗi tải ứng dụng';
+    document.getElementById('modelStatus').dataset.state = 'error';
+    document.getElementById('bootNotice').hidden = false;
+    document.getElementById('bootError').textContent = 'Không tải được mã ứng dụng: ' + error.message + '. Kiểm tra kết nối tới máy chủ rồi tải lại trang.';
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,1214 @@
+[
+  {
+    "stepNumber": 1,
+    "behavior": "ai_neutral_stance",
+    "label": "Tư thế đứng thẳng chuẩn bị (Thân 1°)",
+    "title": "Tư thế đứng thẳng chuẩn bị (Thân 1°)",
+    "instruction": "Đứng thẳng tự nhiên, hai chân mở rộng ngang vai, đầu nhìn thẳng, hai cánh tay và bàn tay thả lỏng dọc thân người.",
+    "description": "Đứng thẳng tự nhiên, hai chân mở rộng ngang vai, đầu nhìn thẳng, hai cánh tay và bàn tay thả lỏng dọc thân người.",
+    "jointDetail": "Đầu +3°/-2° · Tay T 174° · Tay P 180° · Thân 1° · Gối 177°",
+    "jointAngles": "Đầu +3°/-2° · Tay T 174° · Tay P 180° · Thân 1° · Gối 177°",
+    "start": 0,
+    "end": 4.6,
+    "startMs": 0,
+    "endMs": 4600,
+    "keypoints": [
+      {
+        "x": 312.4,
+        "y": 104.8,
+        "score": 0.49
+      },
+      {
+        "x": 316.6,
+        "y": 99.9,
+        "score": 0.71
+      },
+      {
+        "x": 307.3,
+        "y": 101.8,
+        "score": 0.66
+      },
+      {
+        "x": 320.6,
+        "y": 105,
+        "score": 0.56
+      },
+      {
+        "x": 302.1,
+        "y": 109.3,
+        "score": 0.72
+      },
+      {
+        "x": 337.6,
+        "y": 134.2,
+        "score": 0.81
+      },
+      {
+        "x": 285.6,
+        "y": 137.1,
+        "score": 0.74
+      },
+      {
+        "x": 341.2,
+        "y": 172.2,
+        "score": 0.69
+      },
+      {
+        "x": 281.7,
+        "y": 177.3,
+        "score": 0.7
+      },
+      {
+        "x": 332.3,
+        "y": 196.7,
+        "score": 0.53
+      },
+      {
+        "x": 290.2,
+        "y": 195.8,
+        "score": 0.52
+      },
+      {
+        "x": 326.3,
+        "y": 201.9,
+        "score": 0.82
+      },
+      {
+        "x": 296.3,
+        "y": 203.9,
+        "score": 0.77
+      },
+      {
+        "x": 330,
+        "y": 260,
+        "score": 0.85
+      },
+      {
+        "x": 293.1,
+        "y": 261.5,
+        "score": 0.85
+      },
+      {
+        "x": 334.1,
+        "y": 308.3,
+        "score": 0.68
+      },
+      {
+        "x": 285.6,
+        "y": 311.7,
+        "score": 0.69
+      }
+    ]
+  },
+  {
+    "stepNumber": 2,
+    "behavior": "ai_raise_both_hands",
+    "label": "Vươn cao cả hai tay qua đầu (Khuỷu ~155°)",
+    "title": "Vươn cao cả hai tay qua đầu (Khuỷu ~155°)",
+    "instruction": "Đưa đồng thời hai cánh tay vươn thẳng lên cao qua đầu, hai lòng bàn tay hướng vào nhau, mở rộng vai.",
+    "description": "Đưa đồng thời hai cánh tay vươn thẳng lên cao qua đầu, hai lòng bàn tay hướng vào nhau, mở rộng vai.",
+    "jointDetail": "Đầu +0°/-4° · Tay T 70° · Tay P 84° · Thân 0° · Gối 179°",
+    "jointAngles": "Đầu +0°/-4° · Tay T 70° · Tay P 84° · Thân 0° · Gối 179°",
+    "start": 4.8,
+    "end": 6,
+    "startMs": 4800,
+    "endMs": 6000,
+    "keypoints": [
+      {
+        "x": 327.6,
+        "y": 89.2,
+        "score": 0.58
+      },
+      {
+        "x": 331.2,
+        "y": 86.6,
+        "score": 0.65
+      },
+      {
+        "x": 322.3,
+        "y": 87.6,
+        "score": 0.55
+      },
+      {
+        "x": 335.2,
+        "y": 95.5,
+        "score": 0.47
+      },
+      {
+        "x": 318.1,
+        "y": 97.6,
+        "score": 0.72
+      },
+      {
+        "x": 348.9,
+        "y": 113.9,
+        "score": 0.81
+      },
+      {
+        "x": 305.7,
+        "y": 116.5,
+        "score": 0.8
+      },
+      {
+        "x": 365,
+        "y": 79.6,
+        "score": 0.74
+      },
+      {
+        "x": 288,
+        "y": 86.3,
+        "score": 0.8
+      },
+      {
+        "x": 379.1,
+        "y": 51,
+        "score": 0.81
+      },
+      {
+        "x": 269.8,
+        "y": 59.4,
+        "score": 0.78
+      },
+      {
+        "x": 343.9,
+        "y": 193.6,
+        "score": 0.86
+      },
+      {
+        "x": 314.8,
+        "y": 193.8,
+        "score": 0.9
+      },
+      {
+        "x": 340.8,
+        "y": 254.2,
+        "score": 0.8
+      },
+      {
+        "x": 318.1,
+        "y": 253.8,
+        "score": 0.77
+      },
+      {
+        "x": 339.7,
+        "y": 308.8,
+        "score": 0.81
+      },
+      {
+        "x": 317.1,
+        "y": 308.9,
+        "score": 0.77
+      }
+    ]
+  },
+  {
+    "stepNumber": 3,
+    "behavior": "ai_neutral_stance",
+    "label": "Tư thế đứng thẳng chuẩn bị (Thân 1°)",
+    "title": "Tư thế đứng thẳng chuẩn bị (Thân 1°)",
+    "instruction": "Đứng thẳng tự nhiên, hai chân mở rộng ngang vai, đầu nhìn thẳng, hai cánh tay và bàn tay thả lỏng dọc thân người.",
+    "description": "Đứng thẳng tự nhiên, hai chân mở rộng ngang vai, đầu nhìn thẳng, hai cánh tay và bàn tay thả lỏng dọc thân người.",
+    "jointDetail": "Đầu +6°/-2° · Tay T 173° · Tay P 176° · Thân 0° · Gối 180°",
+    "jointAngles": "Đầu +6°/-2° · Tay T 173° · Tay P 176° · Thân 0° · Gối 180°",
+    "start": 6,
+    "end": 7.2,
+    "startMs": 6000,
+    "endMs": 7200,
+    "keypoints": [
+      {
+        "x": 328.8,
+        "y": 101.3,
+        "score": 0.51
+      },
+      {
+        "x": 332.6,
+        "y": 96.3,
+        "score": 0.54
+      },
+      {
+        "x": 323.9,
+        "y": 97.8,
+        "score": 0.72
+      },
+      {
+        "x": 340,
+        "y": 99.4,
+        "score": 0.74
+      },
+      {
+        "x": 319.8,
+        "y": 103.8,
+        "score": 0.5
+      },
+      {
+        "x": 354,
+        "y": 127.9,
+        "score": 0.73
+      },
+      {
+        "x": 306.5,
+        "y": 129.5,
+        "score": 0.8
+      },
+      {
+        "x": 358.9,
+        "y": 163.3,
+        "score": 0.43
+      },
+      {
+        "x": 298.7,
+        "y": 160.4,
+        "score": 0.5
+      },
+      {
+        "x": 352.2,
+        "y": 193.5,
+        "score": 0.4
+      },
+      {
+        "x": 307.1,
+        "y": 188.1,
+        "score": 0.47
+      },
+      {
+        "x": 343.4,
+        "y": 199,
+        "score": 0.7
+      },
+      {
+        "x": 315.1,
+        "y": 199.4,
+        "score": 0.8
+      },
+      {
+        "x": 340.6,
+        "y": 259,
+        "score": 0.74
+      },
+      {
+        "x": 317.9,
+        "y": 258,
+        "score": 0.78
+      },
+      {
+        "x": 340.6,
+        "y": 308.3,
+        "score": 0.73
+      },
+      {
+        "x": 318.9,
+        "y": 308.1,
+        "score": 0.62
+      }
+    ]
+  },
+  {
+    "stepNumber": 4,
+    "behavior": "ai_raise_both_hands",
+    "label": "Vươn cao cả hai tay qua đầu (Khuỷu ~155°)",
+    "title": "Vươn cao cả hai tay qua đầu (Khuỷu ~155°)",
+    "instruction": "Đưa đồng thời hai cánh tay vươn thẳng lên cao qua đầu, hai lòng bàn tay hướng vào nhau, mở rộng vai.",
+    "description": "Đưa đồng thời hai cánh tay vươn thẳng lên cao qua đầu, hai lòng bàn tay hướng vào nhau, mở rộng vai.",
+    "jointDetail": "Đầu +7°/12° · Tay T 69° · Tay P 138° · Thân 8° · Gối 159°",
+    "jointAngles": "Đầu +7°/12° · Tay T 69° · Tay P 138° · Thân 8° · Gối 159°",
+    "start": 7.4,
+    "end": 7.8,
+    "startMs": 7400,
+    "endMs": 7800,
+    "keypoints": [
+      {
+        "x": 337.6,
+        "y": 103.6,
+        "score": 0.51
+      },
+      {
+        "x": 341.6,
+        "y": 99.3,
+        "score": 0.67
+      },
+      {
+        "x": 333,
+        "y": 100.4,
+        "score": 0.58
+      },
+      {
+        "x": 345.8,
+        "y": 104.1,
+        "score": 0.55
+      },
+      {
+        "x": 327.6,
+        "y": 106.4,
+        "score": 0.53
+      },
+      {
+        "x": 359.6,
+        "y": 121.9,
+        "score": 0.71
+      },
+      {
+        "x": 319.2,
+        "y": 124.7,
+        "score": 0.64
+      },
+      {
+        "x": 366.1,
+        "y": 84.4,
+        "score": 0.79
+      },
+      {
+        "x": 316.5,
+        "y": 84.9,
+        "score": 0.69
+      },
+      {
+        "x": 355.3,
+        "y": 52.3,
+        "score": 0.74
+      },
+      {
+        "x": 319.3,
+        "y": 48,
+        "score": 0.43
+      },
+      {
+        "x": 362,
+        "y": 198.8,
+        "score": 0.85
+      },
+      {
+        "x": 333.3,
+        "y": 200.7,
+        "score": 0.8
+      },
+      {
+        "x": 376.6,
+        "y": 252.7,
+        "score": 0.77
+      },
+      {
+        "x": 328.7,
+        "y": 260.8,
+        "score": 0.83
+      },
+      {
+        "x": 380.2,
+        "y": 305.9,
+        "score": 0.71
+      },
+      {
+        "x": 318.7,
+        "y": 308.3,
+        "score": 0.67
+      }
+    ]
+  },
+  {
+    "stepNumber": 5,
+    "behavior": "ai_walk_step",
+    "label": "Bước di chuyển phối hợp tay-chân",
+    "title": "Bước di chuyển phối hợp tay-chân",
+    "instruction": "Bước chân đều đặn, giữ trục cột sống thẳng, hai cánh tay vung tự nhiên dọc thân người.",
+    "description": "Bước chân đều đặn, giữ trục cột sống thẳng, hai cánh tay vung tự nhiên dọc thân người.",
+    "jointDetail": "Đầu +5°/69° · Tay T 44° · Thân 9° · Gối 123°",
+    "jointAngles": "Đầu +5°/69° · Tay T 44° · Thân 9° · Gối 123°",
+    "start": 7.8,
+    "end": 8.2,
+    "startMs": 7800,
+    "endMs": 8200,
+    "keypoints": [
+      {
+        "x": 388.4,
+        "y": 125,
+        "score": 0.62
+      },
+      {
+        "x": 388,
+        "y": 120.8,
+        "score": 0.63
+      },
+      {
+        "x": 383,
+        "y": 122.4,
+        "score": 0.55
+      },
+      {
+        "x": 384.3,
+        "y": 121.7,
+        "score": 0.64
+      },
+      {
+        "x": 372.3,
+        "y": 125.4,
+        "score": 0.71
+      },
+      {
+        "x": 408.2,
+        "y": 142.7,
+        "score": 0.78
+      },
+      {
+        "x": 360.3,
+        "y": 148.1,
+        "score": 0.87
+      },
+      {
+        "x": 442.2,
+        "y": 134.4,
+        "score": 0.71
+      },
+      {
+        "x": 321,
+        "y": 152,
+        "score": 0.73
+      },
+      {
+        "x": 426.6,
+        "y": 128.1,
+        "score": 0.41
+      },
+      {
+        "x": 285.2,
+        "y": 157.7,
+        "score": 0.34
+      },
+      {
+        "x": 414.4,
+        "y": 221.8,
+        "score": 0.78
+      },
+      {
+        "x": 385.8,
+        "y": 224.5,
+        "score": 0.8
+      },
+      {
+        "x": 449.1,
+        "y": 261.4,
+        "score": 0.78
+      },
+      {
+        "x": 356.7,
+        "y": 271,
+        "score": 0.85
+      },
+      {
+        "x": 450.8,
+        "y": 314.9,
+        "score": 0.81
+      },
+      {
+        "x": 327.8,
+        "y": 307.1,
+        "score": 0.75
+      }
+    ]
+  },
+  {
+    "stepNumber": 6,
+    "behavior": "ai_head_turn_left",
+    "label": "Xoay khung xương đầu sang trái (26°)",
+    "title": "Xoay khung xương đầu sang trái (26°)",
+    "instruction": "Giữ cố định trục hai vai, xoay cổ đưa đầu hướng sang bên trái góc khoảng 33°.",
+    "description": "Giữ cố định trục hai vai, xoay cổ đưa đầu hướng sang bên trái góc khoảng 33°.",
+    "jointDetail": "Đầu +8°/33° · Tay T 172° · Tay P 171° · Thân 0° · Gối 173°",
+    "jointAngles": "Đầu +8°/33° · Tay T 172° · Tay P 171° · Thân 0° · Gối 173°",
+    "start": 7.8,
+    "end": 9.2,
+    "startMs": 7800,
+    "endMs": 9200,
+    "keypoints": [
+      {
+        "x": 388.4,
+        "y": 125,
+        "score": 0.62
+      },
+      {
+        "x": 388,
+        "y": 120.8,
+        "score": 0.63
+      },
+      {
+        "x": 383,
+        "y": 122.4,
+        "score": 0.55
+      },
+      {
+        "x": 384.3,
+        "y": 121.7,
+        "score": 0.64
+      },
+      {
+        "x": 372.3,
+        "y": 125.4,
+        "score": 0.71
+      },
+      {
+        "x": 408.2,
+        "y": 142.7,
+        "score": 0.78
+      },
+      {
+        "x": 360.3,
+        "y": 148.1,
+        "score": 0.87
+      },
+      {
+        "x": 442.2,
+        "y": 134.4,
+        "score": 0.71
+      },
+      {
+        "x": 321,
+        "y": 152,
+        "score": 0.73
+      },
+      {
+        "x": 426.6,
+        "y": 128.1,
+        "score": 0.41
+      },
+      {
+        "x": 285.2,
+        "y": 157.7,
+        "score": 0.34
+      },
+      {
+        "x": 414.4,
+        "y": 221.8,
+        "score": 0.78
+      },
+      {
+        "x": 385.8,
+        "y": 224.5,
+        "score": 0.8
+      },
+      {
+        "x": 449.1,
+        "y": 261.4,
+        "score": 0.78
+      },
+      {
+        "x": 356.7,
+        "y": 271,
+        "score": 0.85
+      },
+      {
+        "x": 450.8,
+        "y": 314.9,
+        "score": 0.81
+      },
+      {
+        "x": 327.8,
+        "y": 307.1,
+        "score": 0.75
+      }
+    ]
+  },
+  {
+    "stepNumber": 7,
+    "behavior": "ai_waving",
+    "label": "Vẫy bàn tay hai bên (Xòe 5 ngón)",
+    "title": "Vẫy bàn tay hai bên (Xòe 5 ngón)",
+    "instruction": "Nâng bàn tay trái cao hơn vai, mở rộng 5 ngón tay và lắc cổ tay qua lại.",
+    "description": "Nâng bàn tay trái cao hơn vai, mở rộng 5 ngón tay và lắc cổ tay qua lại.",
+    "jointDetail": "Đầu +2°/43° · Tay T 59° · Tay P 150° · Thân 3° · Gối 150°",
+    "jointAngles": "Đầu +2°/43° · Tay T 59° · Tay P 150° · Thân 3° · Gối 150°",
+    "start": 8,
+    "end": 8.8,
+    "startMs": 8000,
+    "endMs": 8800,
+    "keypoints": [
+      {
+        "x": 405.3,
+        "y": 137.1,
+        "score": 0.47
+      },
+      {
+        "x": 405.2,
+        "y": 132.6,
+        "score": 0.57
+      },
+      {
+        "x": 400.6,
+        "y": 134.2,
+        "score": 0.5
+      },
+      {
+        "x": 402.2,
+        "y": 133.1,
+        "score": 0.57
+      },
+      {
+        "x": 390.7,
+        "y": 137.3,
+        "score": 0.58
+      },
+      {
+        "x": 422.7,
+        "y": 151.5,
+        "score": 0.67
+      },
+      {
+        "x": 379.4,
+        "y": 156.7,
+        "score": 0.79
+      },
+      {
+        "x": 454.1,
+        "y": 130.8,
+        "score": 0.81
+      },
+      {
+        "x": 344.3,
+        "y": 158.2,
+        "score": 0.69
+      },
+      {
+        "x": 427,
+        "y": 125.8,
+        "score": 0.52
+      },
+      {
+        "x": 337.3,
+        "y": 156.4,
+        "score": 0.27
+      },
+      {
+        "x": 425.1,
+        "y": 226.3,
+        "score": 0.83
+      },
+      {
+        "x": 400.7,
+        "y": 227.4,
+        "score": 0.81
+      },
+      {
+        "x": 461.9,
+        "y": 262.8,
+        "score": 0.79
+      },
+      {
+        "x": 363.2,
+        "y": 275.2,
+        "score": 0.81
+      },
+      {
+        "x": 449.9,
+        "y": 320.4,
+        "score": 0.7
+      },
+      {
+        "x": 330.4,
+        "y": 308,
+        "score": 0.68
+      }
+    ]
+  },
+  {
+    "stepNumber": 8,
+    "behavior": "ai_raise_both_hands",
+    "label": "Vươn cao cả hai tay qua đầu (Khuỷu ~155°)",
+    "title": "Vươn cao cả hai tay qua đầu (Khuỷu ~155°)",
+    "instruction": "Đưa đồng thời hai cánh tay vươn thẳng lên cao qua đầu, hai lòng bàn tay hướng vào nhau, mở rộng vai.",
+    "description": "Đưa đồng thời hai cánh tay vươn thẳng lên cao qua đầu, hai lòng bàn tay hướng vào nhau, mở rộng vai.",
+    "jointDetail": "Đầu +8°/33° · Tay T 172° · Tay P 171° · Thân 0° · Gối 173°",
+    "jointAngles": "Đầu +8°/33° · Tay T 172° · Tay P 171° · Thân 0° · Gối 173°",
+    "start": 8.8,
+    "end": 9.2,
+    "startMs": 8800,
+    "endMs": 9200,
+    "keypoints": [
+      {
+        "x": 370.2,
+        "y": 105.8,
+        "score": 0.52
+      },
+      {
+        "x": 373.3,
+        "y": 102.1,
+        "score": 0.66
+      },
+      {
+        "x": 365.9,
+        "y": 101.7,
+        "score": 0.58
+      },
+      {
+        "x": 375.7,
+        "y": 106.5,
+        "score": 0.63
+      },
+      {
+        "x": 358.4,
+        "y": 106.2,
+        "score": 0.72
+      },
+      {
+        "x": 385.7,
+        "y": 123.5,
+        "score": 0.8
+      },
+      {
+        "x": 343.7,
+        "y": 121.5,
+        "score": 0.79
+      },
+      {
+        "x": 391,
+        "y": 86.9,
+        "score": 0.68
+      },
+      {
+        "x": 340.7,
+        "y": 85.7,
+        "score": 0.86
+      },
+      {
+        "x": 387.1,
+        "y": 52.7,
+        "score": 0.73
+      },
+      {
+        "x": 343.5,
+        "y": 51.2,
+        "score": 0.73
+      },
+      {
+        "x": 382.7,
+        "y": 203.3,
+        "score": 0.89
+      },
+      {
+        "x": 351.8,
+        "y": 204.5,
+        "score": 0.87
+      },
+      {
+        "x": 408.4,
+        "y": 251.5,
+        "score": 0.74
+      },
+      {
+        "x": 339.7,
+        "y": 260.1,
+        "score": 0.91
+      },
+      {
+        "x": 428.7,
+        "y": 300.3,
+        "score": 0.83
+      },
+      {
+        "x": 323.9,
+        "y": 307.3,
+        "score": 0.88
+      }
+    ]
+  },
+  {
+    "stepNumber": 9,
+    "behavior": "ai_walk_step",
+    "label": "Bước di chuyển phối hợp tay-chân",
+    "title": "Bước di chuyển phối hợp tay-chân",
+    "instruction": "Bước chân đều đặn, giữ trục cột sống thẳng, hai cánh tay vung tự nhiên dọc thân người.",
+    "description": "Bước chân đều đặn, giữ trục cột sống thẳng, hai cánh tay vung tự nhiên dọc thân người.",
+    "jointDetail": "Đầu +3°/6° · Tay T 163° · Tay P 154° · Thân 0° · Gối 180°",
+    "jointAngles": "Đầu +3°/6° · Tay T 163° · Tay P 154° · Thân 0° · Gối 180°",
+    "start": 9,
+    "end": 10,
+    "startMs": 9000,
+    "endMs": 10000,
+    "keypoints": [
+      {
+        "x": 352.8,
+        "y": 106.2,
+        "score": 0.5
+      },
+      {
+        "x": 355.1,
+        "y": 101.5,
+        "score": 0.72
+      },
+      {
+        "x": 348.1,
+        "y": 101.9,
+        "score": 0.69
+      },
+      {
+        "x": 355,
+        "y": 103,
+        "score": 0.51
+      },
+      {
+        "x": 337.7,
+        "y": 103.7,
+        "score": 0.42
+      },
+      {
+        "x": 365.5,
+        "y": 122.2,
+        "score": 0.83
+      },
+      {
+        "x": 325.4,
+        "y": 122.4,
+        "score": 0.78
+      },
+      {
+        "x": 375,
+        "y": 90.7,
+        "score": 0.66
+      },
+      {
+        "x": 326.8,
+        "y": 85.4,
+        "score": 0.44
+      },
+      {
+        "x": 381,
+        "y": 53.1,
+        "score": 0.8
+      },
+      {
+        "x": 333.4,
+        "y": 53.3,
+        "score": 0.75
+      },
+      {
+        "x": 360,
+        "y": 196.9,
+        "score": 0.75
+      },
+      {
+        "x": 332.2,
+        "y": 197.9,
+        "score": 0.85
+      },
+      {
+        "x": 360.8,
+        "y": 256.2,
+        "score": 0.82
+      },
+      {
+        "x": 328.3,
+        "y": 257.1,
+        "score": 0.61
+      },
+      {
+        "x": 355.3,
+        "y": 305.5,
+        "score": 0.68
+      },
+      {
+        "x": 319.7,
+        "y": 306.4,
+        "score": 0.67
+      }
+    ]
+  },
+  {
+    "stepNumber": 10,
+    "behavior": "ai_head_turn_left",
+    "label": "Xoay khung xương đầu sang trái (26°)",
+    "title": "Xoay khung xương đầu sang trái (26°)",
+    "instruction": "Giữ cố định trục hai vai, xoay cổ đưa đầu hướng sang bên trái góc khoảng 53°.",
+    "description": "Giữ cố định trục hai vai, xoay cổ đưa đầu hướng sang bên trái góc khoảng 53°.",
+    "jointDetail": "Đầu +9°/53° · Tay T 147° · Tay P 159° · Thân 3° · Gối 176°",
+    "jointAngles": "Đầu +9°/53° · Tay T 147° · Tay P 159° · Thân 3° · Gối 176°",
+    "start": 10.2,
+    "end": 12.2,
+    "startMs": 10200,
+    "endMs": 12200,
+    "keypoints": [
+      {
+        "x": 329.7,
+        "y": 108.7,
+        "score": 0.66
+      },
+      {
+        "x": 331.6,
+        "y": 104.5,
+        "score": 0.57
+      },
+      {
+        "x": 325.6,
+        "y": 104.4,
+        "score": 0.41
+      },
+      {
+        "x": 327.8,
+        "y": 105.1,
+        "score": 0.58
+      },
+      {
+        "x": 314.8,
+        "y": 105.3,
+        "score": 0.5
+      },
+      {
+        "x": 339.7,
+        "y": 133.1,
+        "score": 0.79
+      },
+      {
+        "x": 293.2,
+        "y": 131.4,
+        "score": 0.75
+      },
+      {
+        "x": 342.1,
+        "y": 152.6,
+        "score": 0.38
+      },
+      {
+        "x": 278.5,
+        "y": 165.2,
+        "score": 0.48
+      },
+      {
+        "x": 342.1,
+        "y": 139.6,
+        "score": 0.54
+      },
+      {
+        "x": 282.4,
+        "y": 160.8,
+        "score": 0.44
+      },
+      {
+        "x": 327.2,
+        "y": 200.7,
+        "score": 0.75
+      },
+      {
+        "x": 299.2,
+        "y": 202.1,
+        "score": 0.87
+      },
+      {
+        "x": 334.3,
+        "y": 257.7,
+        "score": 0.79
+      },
+      {
+        "x": 302.9,
+        "y": 257.8,
+        "score": 0.81
+      },
+      {
+        "x": 336.5,
+        "y": 307.4,
+        "score": 0.67
+      },
+      {
+        "x": 305.9,
+        "y": 305.5,
+        "score": 0.67
+      }
+    ]
+  },
+  {
+    "stepNumber": 11,
+    "behavior": "ai_raise_both_hands",
+    "label": "Vươn cao cả hai tay qua đầu (Khuỷu ~155°)",
+    "title": "Vươn cao cả hai tay qua đầu (Khuỷu ~155°)",
+    "instruction": "Đưa đồng thời hai cánh tay vươn thẳng lên cao qua đầu, hai lòng bàn tay hướng vào nhau, mở rộng vai.",
+    "description": "Đưa đồng thời hai cánh tay vươn thẳng lên cao qua đầu, hai lòng bàn tay hướng vào nhau, mở rộng vai.",
+    "jointDetail": "Đầu +15°/75° · Tay T 160° · Tay P 100° · Thân 5° · Gối 177°",
+    "jointAngles": "Đầu +15°/75° · Tay T 160° · Tay P 100° · Thân 5° · Gối 177°",
+    "start": 10.4,
+    "end": 10.8,
+    "startMs": 10400,
+    "endMs": 10800,
+    "keypoints": [
+      {
+        "x": 313,
+        "y": 109.7,
+        "score": 0.59
+      },
+      {
+        "x": 314.7,
+        "y": 106,
+        "score": 0.67
+      },
+      {
+        "x": 307.4,
+        "y": 104.3,
+        "score": 0.61
+      },
+      {
+        "x": 310.7,
+        "y": 107.4,
+        "score": 0.53
+      },
+      {
+        "x": 294.9,
+        "y": 106.9,
+        "score": 0.74
+      },
+      {
+        "x": 319.8,
+        "y": 127.9,
+        "score": 0.63
+      },
+      {
+        "x": 279.2,
+        "y": 125.9,
+        "score": 0.64
+      },
+      {
+        "x": 330.4,
+        "y": 95.8,
+        "score": 0.73
+      },
+      {
+        "x": 272.1,
+        "y": 89.8,
+        "score": 0.42
+      },
+      {
+        "x": 331.1,
+        "y": 57.3,
+        "score": 0.82
+      },
+      {
+        "x": 284.3,
+        "y": 57.7,
+        "score": 0.65
+      },
+      {
+        "x": 309,
+        "y": 205.1,
+        "score": 0.88
+      },
+      {
+        "x": 280,
+        "y": 201.8,
+        "score": 0.87
+      },
+      {
+        "x": 321.8,
+        "y": 257.6,
+        "score": 0.85
+      },
+      {
+        "x": 261.4,
+        "y": 248.7,
+        "score": 0.62
+      },
+      {
+        "x": 333.8,
+        "y": 307.4,
+        "score": 0.83
+      },
+      {
+        "x": 265.7,
+        "y": 290.4,
+        "score": 0.73
+      }
+    ]
+  },
+  {
+    "stepNumber": 12,
+    "behavior": "ai_walk_step",
+    "label": "Bước di chuyển phối hợp tay-chân",
+    "title": "Bước di chuyển phối hợp tay-chân",
+    "instruction": "Bước chân đều đặn, giữ trục cột sống thẳng, hai cánh tay vung tự nhiên dọc thân người.",
+    "description": "Bước chân đều đặn, giữ trục cột sống thẳng, hai cánh tay vung tự nhiên dọc thân người.",
+    "jointDetail": "Đầu +12°/75° · Tay T 163° · Tay P 29° · Thân 1° · Gối 179°",
+    "jointAngles": "Đầu +12°/75° · Tay T 163° · Tay P 29° · Thân 1° · Gối 179°",
+    "start": 10.6,
+    "end": 11.2,
+    "startMs": 10600,
+    "endMs": 11200,
+    "keypoints": [
+      {
+        "x": 288.3,
+        "y": 120.2,
+        "score": 0.53
+      },
+      {
+        "x": 290.1,
+        "y": 116.5,
+        "score": 0.65
+      },
+      {
+        "x": 282.9,
+        "y": 114.3,
+        "score": 0.7
+      },
+      {
+        "x": 282.3,
+        "y": 114.9,
+        "score": 0.67
+      },
+      {
+        "x": 270.3,
+        "y": 114.2,
+        "score": 0.76
+      },
+      {
+        "x": 296.4,
+        "y": 135.9,
+        "score": 0.72
+      },
+      {
+        "x": 252.6,
+        "y": 133.3,
+        "score": 0.8
+      },
+      {
+        "x": 321.7,
+        "y": 117.1,
+        "score": 0.78
+      },
+      {
+        "x": 229.7,
+        "y": 106.5,
+        "score": 0.78
+      },
+      {
+        "x": 343,
+        "y": 84.6,
+        "score": 0.65
+      },
+      {
+        "x": 252.6,
+        "y": 79,
+        "score": 0.76
+      },
+      {
+        "x": 281.6,
+        "y": 215.8,
+        "score": 0.88
+      },
+      {
+        "x": 254,
+        "y": 212.4,
+        "score": 0.93
+      },
+      {
+        "x": 306.7,
+        "y": 262.3,
+        "score": 0.75
+      },
+      {
+        "x": 224.6,
+        "y": 254.9,
+        "score": 0.65
+      },
+      {
+        "x": 327.4,
+        "y": 306.3,
+        "score": 0.89
+      },
+      {
+        "x": 212.5,
+        "y": 299.8,
+        "score": 0.78
+      }
+    ]
+  }
+]

@@ -1,0 +1,176 @@
+{
+  "app": "behavior-analysis",
+  "version": "1.0.0",
+  "exportedAt": "2026-09-23T08:00:00.000Z",
+  "media": {
+    "name": "demo-lop-hoc.mp4",
+    "duration": 60,
+    "width": 1280,
+    "height": 720
+  },
+  "analysis": {
+    "analyzedAt": "2026-09-23T07:58:10.000Z",
+    "modelType": "multipose",
+    "sampleInterval": 0.25,
+    "minScore": 0.3,
+    "minSegment": 0.5,
+    "mergeGap": 0.6,
+    "partial": false,
+    "filter": null
+  },
+  "note": "Dữ liệu mẫu để thử giao diện, bảng kết quả và chatbot khi chưa có video.",
+  "segments": [
+    {
+      "personId": 1,
+      "behavior": "standing",
+      "start": 0,
+      "end": 4.5,
+      "confidence": 0.93,
+      "source": "video"
+    },
+    {
+      "personId": 1,
+      "behavior": "walking",
+      "start": 4.5,
+      "end": 12.25,
+      "confidence": 0.78,
+      "source": "video"
+    },
+    {
+      "personId": 1,
+      "behavior": "sitting",
+      "start": 12.25,
+      "end": 31,
+      "confidence": 0.81,
+      "source": "video"
+    },
+    {
+      "personId": 1,
+      "behavior": "phone",
+      "start": 15.5,
+      "end": 24,
+      "confidence": 0.72,
+      "source": "video"
+    },
+    {
+      "personId": 1,
+      "behavior": "standing",
+      "start": 31,
+      "end": 36.5,
+      "confidence": 0.9,
+      "source": "video"
+    },
+    {
+      "personId": 1,
+      "behavior": "hand_raised",
+      "start": 33,
+      "end": 35.25,
+      "confidence": 0.74,
+      "source": "video"
+    },
+    {
+      "personId": 1,
+      "behavior": "walking",
+      "start": 36.5,
+      "end": 44,
+      "confidence": 0.76,
+      "source": "video"
+    },
+    {
+      "personId": 1,
+      "behavior": "falling",
+      "start": 44,
+      "end": 46.25,
+      "confidence": 0.88,
+      "source": "video"
+    },
+    {
+      "personId": 1,
+      "behavior": "lying",
+      "start": 44,
+      "end": 52.5,
+      "confidence": 0.85,
+      "source": "video"
+    },
+    {
+      "personId": 2,
+      "behavior": "walking",
+      "start": 2,
+      "end": 9.5,
+      "confidence": 0.8,
+      "source": "video"
+    },
+    {
+      "personId": 2,
+      "behavior": "standing",
+      "start": 9.5,
+      "end": 18,
+      "confidence": 0.91,
+      "source": "video"
+    },
+    {
+      "personId": 2,
+      "behavior": "waving",
+      "start": 11,
+      "end": 13.5,
+      "confidence": 0.7,
+      "source": "video"
+    },
+    {
+      "personId": 2,
+      "behavior": "running",
+      "start": 18,
+      "end": 23.75,
+      "confidence": 0.73,
+      "source": "video"
+    },
+    {
+      "personId": 2,
+      "behavior": "standing",
+      "start": 23.75,
+      "end": 30,
+      "confidence": 0.9,
+      "source": "video"
+    },
+    {
+      "personId": 2,
+      "behavior": "bending",
+      "start": 30,
+      "end": 33.5,
+      "confidence": 0.69,
+      "source": "video"
+    },
+    {
+      "personId": 2,
+      "behavior": "walking",
+      "start": 46.5,
+      "end": 55,
+      "confidence": 0.79,
+      "source": "video"
+    },
+    {
+      "personId": 2,
+      "behavior": "standing",
+      "start": 55,
+      "end": 60,
+      "confidence": 0.92,
+      "source": "video"
+    },
+    {
+      "personId": 3,
+      "behavior": "sitting",
+      "start": 20,
+      "end": 60,
+      "confidence": 0.84,
+      "source": "video"
+    },
+    {
+      "personId": 3,
+      "behavior": "hand_raised",
+      "start": 41,
+      "end": 43,
+      "confidence": 0.71,
+      "source": "video"
+    }
+  ]
+}
